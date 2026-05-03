@@ -266,6 +266,8 @@ button {
 }
 
 .game-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
   overflow: hidden;
 }
 
@@ -300,14 +302,41 @@ button {
 
 .game-card-body {
   display: grid;
+  grid-template-rows: auto minmax(3.6rem, auto) minmax(3.2rem, auto) minmax(5.5rem, auto) auto;
   gap: 14px;
   padding: 20px;
+  height: 100%;
 }
 
 .game-card-header {
   display: flex;
   justify-content: space-between;
   gap: 12px;
+}
+
+.game-card h3,
+.game-card p {
+  margin: 0;
+}
+
+.game-card h3 {
+  align-self: start;
+  line-height: 1.2;
+}
+
+.game-card-body > p {
+  align-self: start;
+  line-height: 1.6;
+}
+
+.game-card .tag-row {
+  align-self: start;
+  align-content: start;
+}
+
+.game-card .text-button {
+  margin-top: auto;
+  justify-self: start;
 }
 
 .tag-chip {

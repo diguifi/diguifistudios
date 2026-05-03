@@ -5,7 +5,7 @@ export interface GameEntry {
   description: string;
   releaseYear: number;
   tags: string[];
-  status: 'featured' | 'released' | 'jam' | 'prototype';
+  status: 'featured' | 'released' | 'jam' | 'prototype' | 'tool';
   platformLabel: string;
   itchUrl: string;
   img?: string;

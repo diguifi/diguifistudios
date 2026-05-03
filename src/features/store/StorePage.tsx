@@ -48,11 +48,10 @@ export function StorePage() {
   return (
     <div className="page-stack store-page">
       <section className="section-heading">
-        <p className="eyebrow">Storefront foundation</p>
-        <h1>Commerce-ready UI that waits for the real Stripe backend.</h1>
+        <p className="eyebrow">Storefront</p>
+        <h1>Tiny Store</h1>
         <p>
-          This screen is intentionally small in scope: one testable product, authenticated checkout
-          flow, and the contracts needed for future real products or services.
+          Any support is deeply appreciated!
         </p>
       </section>
 

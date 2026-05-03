@@ -77,8 +77,7 @@ export function HomePage() {
           <p className="eyebrow">Games Portfolio</p>
           <h1>Telling stories through interactive experiences.</h1>
           <p className="hero-description">
-            Diguifi Studios gathers browser experiments, game jam releases, and ongoing ideas in one
-            portfolio designed for discovery, replay, and future commerce.
+            Welcome to <b>Diguifi Studios</b>. Take a look at my browser experiments, game jam releases, tools and ongoing ideas!
           </p>
           <div className="hero-actions">
             <button type="button" className="primary-button" onClick={scrollToCatalog}>
@@ -113,23 +112,22 @@ export function HomePage() {
 
       <section className="stats-strip" aria-label="Studio summary">
         <div>
-          <strong>{games.length}</strong>
-          <span>catalog entries</span>
+          <strong>{games.filter((game) => game.status === 'released').length}</strong>
+          <span>released games</span>
         </div>
         <div>
           <strong>{games.filter((game) => game.status === 'jam').length}</strong>
-          <span>jam games</span>
+          <span>jam entries</span>
         </div>
         <div>
-          <strong>Google OAuth</strong>
-          <span>session-ready storefront</span>
+          <strong>{games.filter((game) => game.status === 'tool').length}</strong>
+          <span>tools created</span>
         </div>
       </section>
 
       <section className="catalog-section">
         <div className="section-heading">
-          <p className="eyebrow">Game catalog</p>
-          <h2>Everything listed on itch, reframed for a portfolio-first experience.</h2>
+          <p className="eyebrow">Projects catalog</p>
         </div>
 
         <div className="catalog-grid" id="game-grid">

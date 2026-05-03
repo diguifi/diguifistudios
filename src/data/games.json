@@ -6,7 +6,7 @@
     "description": "A small atmospheric browser experience that sets the tone for Diguifi's catalog with a compact but expressive presentation.",
     "releaseYear": 2025,
     "tags": ["browser", "narrative", "atmospheric"],
-    "status": "featured",
+    "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE4NDgxOTczLnBuZw==/original/JgZymf.png",
     "itchUrl": "https://diguifi.itch.io/were-just-old-kids",
@@ -61,6 +61,18 @@
     "itchUrl": "https://diguifi.itch.io/dudes-quest"
   },
   {
+    "id": "tiny-rpg-studio",
+    "title": "Tiny RPG Studio",
+    "tagline": "A minimalistic engine for creating your own tiny RPGs.",
+    "description": "A browser-based tool for creating and sharing small-scale RPG experiences.",
+    "releaseYear": 2025,
+    "tags": ["tool", "browser", "rpg"],
+    "status": "tool",
+    "platformLabel": "Run in browser",
+    "img": "https://img.itch.zone/aW1nLzI2ODM4NTgxLnBuZw==/315x250%23c/7SUItJ.png",
+    "itchUrl": "https://andredarcie.itch.io/tiny-rpg-studio"
+  },
+  {
     "id": "tic-tac-toe-evolved",
     "title": "Tic Tac Toe: Evolved",
     "tagline": "Play tic-tac-toe online like never before.",
@@ -79,7 +91,7 @@
     "description": "A browser tool/product adjacent to the game catalog, showing how the studio can host software products beyond pure games.",
     "releaseYear": 2025,
     "tags": ["tool", "browser", "discovery"],
-    "status": "released",
+    "status": "tool",
     "platformLabel": "Run in browser",
     "img": "https://img.itch.zone/aW1nLzEzMDUzMzg5LnBuZw==/original/2MSesY.png",
     "itchUrl": "https://diguifi.itch.io/openvideogamedata"

@@ -8,6 +8,7 @@
     "tags": ["browser", "narrative", "atmospheric"],
     "status": "featured",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE4NDgxOTczLnBuZw==/original/JgZymf.png",
     "itchUrl": "https://diguifi.itch.io/were-just-old-kids",
     "highlight": true
   },
@@ -20,6 +21,7 @@
     "tags": ["rpg", "browser", "multiplayer"],
     "status": "released",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzY2NzU3NjMucG5n/original/XjFIOX.png",
     "itchUrl": "https://diguifi.itch.io/tiny-land"
   },
   {
@@ -28,9 +30,10 @@
     "tagline": "What are you running from?",
     "description": "A platformer with a tense pitch and a stronger sense of pursuit than its small footprint suggests.",
     "releaseYear": 2025,
-    "tags": ["platformer", "mystery", "browser"],
+    "tags": ["platformer", "mystery", "browser", "android"],
     "status": "released",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzc1ODQyNTQucG5n/original/XWDc%2Bq.png",
     "itchUrl": "https://diguifi.itch.io/nur"
   },
   {
@@ -39,10 +42,11 @@
     "tagline": "Small thriller about you.",
     "description": "A concise thriller-puzzle premise that fits naturally into a portfolio focused on mood and experimentation.",
     "releaseYear": 2025,
-    "tags": ["puzzle", "thriller", "browser"],
+    "tags": ["puzzle", "walking-sim", "browser"],
     "status": "released",
     "platformLabel": "Play in browser",
-    "itchUrl": "https://diguifi.itch.io/i-dont-know-where-i-am"
+    "img": "https://img.itch.zone/aW1nLzEwMDg3NTgxLnBuZw==/original/13oM%2F3.png",
+    "itchUrl": "https://diguifi.itch.io/where-i-am"
   },
   {
     "id": "dudes-quest",
@@ -53,6 +57,7 @@
     "tags": ["adventure", "side-scroller", "browser"],
     "status": "released",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE4OTQ5NDQucG5n/original/pw36S%2F.png",
     "itchUrl": "https://diguifi.itch.io/dudes-quest"
   },
   {
@@ -64,6 +69,7 @@
     "tags": ["puzzle", "multiplayer", "browser"],
     "status": "released",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE0MTg1NTQ5LnBuZw==/original/Nw9p8s.png",
     "itchUrl": "https://diguifi.itch.io/tic-tac-toe-evolved"
   },
   {
@@ -73,9 +79,10 @@
     "description": "A browser tool/product adjacent to the game catalog, showing how the studio can host software products beyond pure games.",
     "releaseYear": 2025,
     "tags": ["tool", "browser", "discovery"],
-    "status": "prototype",
+    "status": "released",
     "platformLabel": "Run in browser",
-    "itchUrl": "https://diguifi.itch.io/open-video-game-data"
+    "img": "https://img.itch.zone/aW1nLzEzMDUzMzg5LnBuZw==/original/2MSesY.png",
+    "itchUrl": "https://diguifi.itch.io/openvideogamedata"
   },
   {
     "id": "tiden",
@@ -86,6 +93,7 @@
     "tags": ["visual novel", "jam", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzI1NDIwMjc2LnBuZw==/original/z6%2F%2BzW.png",
     "itchUrl": "https://diguifi.itch.io/tiden"
   },
   {
@@ -97,6 +105,7 @@
     "tags": ["puzzle", "jam", "prototype"],
     "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzIyODM0NTM3LnBuZw==/original/zKJbgr.png",
     "itchUrl": "https://diguifi.itch.io/escaping-work"
   },
   {
@@ -108,6 +117,7 @@
     "tags": ["platformer", "jam", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE3NDUyMjA5LnBuZw==/original/gh5BN0.png",
     "itchUrl": "https://diguifi.itch.io/escalamuta"
   },
   {
@@ -119,6 +129,7 @@
     "tags": ["survival", "jam", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE3NDUxODMxLnBuZw==/original/%2FqnzjW.png",
     "itchUrl": "https://diguifi.itch.io/moo"
   },
   {
@@ -130,6 +141,7 @@
     "tags": ["puzzle", "jam", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE3NDUxNzcyLnBuZw==/original/l%2BRQcX.png",
     "itchUrl": "https://diguifi.itch.io/the-walking-cube"
   },
   {
@@ -141,6 +153,7 @@
     "tags": ["platformer", "jam", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzE3NDUyNDY1LnBuZw==/original/tQb2rc.png",
     "itchUrl": "https://diguifi.itch.io/tow-escape"
   },
   {
@@ -149,9 +162,10 @@
     "tagline": "He wants you to seek knowlege.",
     "description": "An adventure release with intentionally eccentric tone, preserved here as part of the studio's archive.",
     "releaseYear": 2021,
-    "tags": ["adventure", "browser", "oddity"],
-    "status": "released",
+    "tags": ["thriller", "browser", "oddity"],
+    "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzcwNDMzMTcucG5n/original/0LQ8ag.png",
     "itchUrl": "https://diguifi.itch.io/legemd-of-bilu"
   },
   {
@@ -160,10 +174,11 @@
     "tagline": "A metroidvania game.",
     "description": "A work-in-progress metroidvania concept that can serve as future spotlight content when the storefront expands.",
     "releaseYear": 2021,
-    "tags": ["metroidvania", "wip", "platformer"],
-    "status": "prototype",
+    "tags": ["metroidvania", "2.5d", "platformer"],
+    "status": "jam",
     "platformLabel": "Play in browser",
-    "itchUrl": "https://diguifi.itch.io/secrets-of-the-cursed-mountain-wip"
+    "img": "https://img.itch.zone/aW1nLzg0MTY1MzEucG5n/original/5MMG7x.png",
+    "itchUrl": "https://diguifi.itch.io/secrets-of-the-cursed-mountain"
   },
   {
     "id": "piracy-isnt-stealing",
@@ -174,7 +189,8 @@
     "tags": ["jam", "browser", "experimental"],
     "status": "jam",
     "platformLabel": "Play in browser",
-    "itchUrl": "https://diguifi.itch.io/piracy-isnt-stealing"
+    "img": "https://img.itch.zone/aW1nLzE3NDkxOTY3LnBuZw==/original/IPvuNO.png",
+    "itchUrl": "https://diguifi.itch.io/isnt-stealing"
   },
   {
     "id": "busted",
@@ -183,8 +199,9 @@
     "description": "A compact escape-room puzzle with clear explanatory value inside a curated portfolio page.",
     "releaseYear": 2021,
     "tags": ["puzzle", "escape room", "browser"],
-    "status": "released",
+    "status": "jam",
     "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzIxNTkxNTEucG5n/original/LTFqvR.png",
     "itchUrl": "https://diguifi.itch.io/busted"
   },
   {
@@ -196,6 +213,7 @@
     "tags": ["jam", "ggj", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
-    "itchUrl": "https://diguifi.itch.io/make-me-laugh-ggj-2024"
+    "img": "https://img.itch.zone/aW1nLzE3NDU0NjY4LnBuZw==/original/PxJ%2Bn6.png",
+    "itchUrl": "https://diguifi.itch.io/make-me-laugh-ggj"
   }
 ]

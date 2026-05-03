@@ -199,11 +199,38 @@ button {
 
 .feature-card {
   display: grid;
-  align-content: end;
   min-height: 100%;
   background:
     linear-gradient(160deg, rgba(136, 192, 255, 0.2), rgba(9, 17, 26, 0.2)),
     var(--panel-strong);
+  overflow: hidden;
+  padding: 0;
+}
+
+.feature-card-media {
+  position: relative;
+}
+
+.feature-card-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(9, 17, 26, 0.04) 0%, rgba(9, 17, 26, 0.72) 100%);
+  pointer-events: none;
+}
+
+.feature-card-media .game-cover,
+.feature-card-media .cover-fallback {
+  min-height: 260px;
+  aspect-ratio: auto;
+}
+
+.feature-card-body {
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  padding: 28px 34px 34px;
 }
 
 .stats-strip {
@@ -242,14 +269,27 @@ button {
   overflow: hidden;
 }
 
+.game-cover,
+.cover-fallback {
+  min-height: 180px;
+}
+
+.game-cover {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  background: #10172c;
+  aspect-ratio: 16 / 9;
+}
+
 .cover-fallback {
   display: grid;
   place-items: center;
-  min-height: 180px;
   background:
     linear-gradient(135deg, rgba(136, 192, 255, 0.26), transparent),
     linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent),
     #10172c;
+  aspect-ratio: 16 / 9;
 }
 
 .cover-fallback span {
@@ -358,5 +398,13 @@ button {
 
   .hero-copy h1 {
     font-size: 2.6rem;
+  }
+
+  .feature-card {
+    padding: 0;
+  }
+
+  .feature-card-body {
+    padding: 20px 22px 22px;
   }
 }

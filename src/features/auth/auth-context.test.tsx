@@ -28,7 +28,24 @@ function AuthHarness() {
 }
 
 describe('AuthProvider', () => {
+  test('stays anonymous and skips refresh when there is no stored token', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+
+    render(
+      <AuthProvider>
+        <AuthHarness />
+      </AuthProvider>
+    );
+
+    await screen.findByText('anonymous');
+    expect(screen.getByText('no-user')).toBeInTheDocument();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   test('hydrates the authenticated user after refresh', async () => {
+    window.localStorage.setItem('jwt', 'stored-jwt');
+
     const fetchMock = vi
       .fn()
       .mockImplementationOnce(() => jsonResponse({ ok: true }))
@@ -63,6 +80,7 @@ describe('AuthProvider', () => {
   });
 
   test('falls back to anonymous when refresh returns 401', async () => {
+    window.localStorage.setItem('jwt', 'expired-jwt');
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue(new Response('Unauthorized', { status: 401 }))
@@ -76,9 +94,12 @@ describe('AuthProvider', () => {
 
     await screen.findByText('anonymous');
     expect(screen.getByText('no-user')).toBeInTheDocument();
+    expect(window.localStorage.getItem('jwt')).toBeNull();
   });
 
   test('logs out and clears the authenticated user', async () => {
+    window.localStorage.setItem('jwt', 'stored-jwt');
+
     const fetchMock = vi
       .fn()
       .mockImplementationOnce(() => jsonResponse({ ok: true }))
@@ -107,5 +128,6 @@ describe('AuthProvider', () => {
       expect(screen.getByText('anonymous')).toBeInTheDocument();
     });
     expect(screen.getByText('no-user')).toBeInTheDocument();
+    expect(window.localStorage.getItem('jwt')).toBeNull();
   });
 });

@@ -19,9 +19,33 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
+const AUTH_TOKEN_STORAGE_KEYS = ['jwt', 'token', 'accessToken', 'authToken'] as const;
+
+function hasStoredAuthToken() {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  return AUTH_TOKEN_STORAGE_KEYS.some((key) => {
+    const value = window.localStorage.getItem(key);
+    return typeof value === 'string' && value.trim().length > 0;
+  });
+}
+
+function clearStoredAuthTokens() {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  AUTH_TOKEN_STORAGE_KEYS.forEach((key) => {
+    window.localStorage.removeItem(key);
+  });
+}
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [authState, setAuthState] = useState<AuthState>('refreshing');
+  const [authState, setAuthState] = useState<AuthState>(() =>
+    hasStoredAuthToken() ? 'refreshing' : 'anonymous'
+  );
   const [user, setUser] = useState<AuthUser | null>(null);
 
   const loadMe = useCallback(async () => {
@@ -37,6 +61,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       await apiClient.post('/api/auth/refresh', {});
       await loadMe();
     } catch (error) {
+      clearStoredAuthTokens();
       setUser(null);
       setAuthState('anonymous');
 
@@ -49,6 +74,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [loadMe]);
 
   useEffect(() => {
+    if (!hasStoredAuthToken()) {
+      setAuthState('anonymous');
+      return;
+    }
+
     void refreshSession();
   }, [refreshSession]);
 
@@ -65,6 +95,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     try {
       await apiClient.post('/api/auth/logout', {});
     } finally {
+      clearStoredAuthTokens();
       setUser(null);
       setAuthState('anonymous');
     }

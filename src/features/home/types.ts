@@ -8,6 +8,7 @@ export interface GameEntry {
   status: 'featured' | 'released' | 'jam' | 'prototype';
   platformLabel: string;
   itchUrl: string;
+  img?: string;
   cover?: string;
   screenshots?: string[];
   highlight?: boolean;

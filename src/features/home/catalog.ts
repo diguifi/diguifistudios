@@ -7,7 +7,7 @@ export function loadGamesCatalog(): GameEntry[] {
   return catalog.map((entry) => ({
     ...entry,
     screenshots: entry.screenshots ?? [],
-    cover: entry.cover ?? undefined,
+    cover: entry.cover ?? entry.img ?? undefined,
     highlight: entry.highlight ?? false
   }));
 }

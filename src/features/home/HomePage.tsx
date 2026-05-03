@@ -3,6 +3,29 @@ import { Link } from 'react-router-dom';
 import { loadGamesCatalog } from './catalog';
 import type { GameEntry } from './types';
 
+function GameCover({ game }: { game: GameEntry }) {
+  const [hasImageError, setHasImageError] = useState(false);
+  const imageUrl = game.cover ?? game.img;
+
+  if (!imageUrl || hasImageError) {
+    return (
+      <div className="cover-fallback" aria-hidden="true">
+        <span>{game.title.slice(0, 1)}</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      className="game-cover"
+      src={imageUrl}
+      alt={`Cover art for ${game.title}`}
+      loading="lazy"
+      onError={() => setHasImageError(true)}
+    />
+  );
+}
+
 function GamePanel({
   game,
   onClose
@@ -69,16 +92,21 @@ export function HomePage() {
 
         {featuredGame ? (
           <div className="feature-card">
-            <p className="eyebrow">Featured release</p>
-            <h2>{featuredGame.title}</h2>
-            <p>{featuredGame.tagline}</p>
-            <button
-              type="button"
-              className="ghost-button"
-              onClick={() => setSelectedGame(featuredGame)}
-            >
-              Open details
-            </button>
+            <div className="feature-card-media">
+              <GameCover game={featuredGame} />
+            </div>
+            <div className="feature-card-body">
+              <p className="eyebrow">Featured release</p>
+              <h2>{featuredGame.title}</h2>
+              <p>{featuredGame.tagline}</p>
+              <button
+                type="button"
+                className="ghost-button"
+                onClick={() => setSelectedGame(featuredGame)}
+              >
+                Open details
+              </button>
+            </div>
           </div>
         ) : null}
       </section>
@@ -107,9 +135,7 @@ export function HomePage() {
         <div className="catalog-grid" id="game-grid">
           {games.map((game) => (
             <article key={game.id} className="game-card">
-              <div className="cover-fallback" aria-hidden="true">
-                <span>{game.title.slice(0, 1)}</span>
-              </div>
+              <GameCover game={game} />
               <div className="game-card-body">
                 <div className="game-card-header">
                   <p className="game-status">{game.status}</p>

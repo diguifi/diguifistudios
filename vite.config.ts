@@ -8,6 +8,10 @@ export default defineConfig(({ mode }) => {
   return {
     base: basePath,
     plugins: [react()],
+    server: {
+      port: 5174,
+      open: true,
+    },
     test: {
       environment: 'jsdom',
       setupFiles: './src/test/setup.ts',

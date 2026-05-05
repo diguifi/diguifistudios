@@ -19,7 +19,7 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     env:
-      VITE_APP_BASE_PATH: /diguifistudios/
+      VITE_APP_BASE_PATH: /
       VITE_ENABLE_API_MOCKS: false
     steps:
       - name: Checkout

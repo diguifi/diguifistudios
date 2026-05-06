@@ -44,7 +44,7 @@ describe('AuthProvider', () => {
   });
 
   test('hydrates the authenticated user after refresh', async () => {
-    window.localStorage.setItem('jwt', 'stored-jwt');
+    window.localStorage.setItem('auth.refreshToken', 'stored-refresh-token');
 
     const fetchMock = vi
       .fn()
@@ -69,12 +69,41 @@ describe('AuthProvider', () => {
     expect(screen.getByText('player@diguifi.studio')).toBeInTheDocument();
     expect(fetchMock).toHaveBeenNthCalledWith(
       1,
-      '/api/auth/refresh',
+      expect.stringMatching(/\/api\/auth\/refresh$/),
       expect.objectContaining({ method: 'POST' })
     );
     expect(fetchMock).toHaveBeenNthCalledWith(
       2,
-      '/api/auth/me',
+      expect.stringMatching(/\/api\/auth\/me$/),
+      expect.objectContaining({ method: 'GET' })
+    );
+  });
+
+  test('hydrates the authenticated user from the stored access token without forcing refresh', async () => {
+    window.localStorage.setItem('auth.accessToken', 'stored-access-token');
+
+    const fetchMock = vi.fn().mockImplementationOnce(() =>
+      jsonResponse({
+        id: 'user_01',
+        email: 'player@diguifi.studio',
+        name: 'Diguifi Player'
+      })
+    );
+
+    vi.stubGlobal('fetch', fetchMock);
+
+    render(
+      <AuthProvider>
+        <AuthHarness />
+      </AuthProvider>
+    );
+
+    await screen.findByText('authenticated');
+    expect(screen.getByText('player@diguifi.studio')).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
+      expect.stringMatching(/\/api\/auth\/me$/),
       expect.objectContaining({ method: 'GET' })
     );
   });

@@ -1,34 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../auth/auth-context';
 import { apiClient } from '../../shared/api/client';
 import { buildAbsoluteAppUrl } from '../../shared/config';
+import { redirectToUrl } from '../../shared/navigation';
 import type { CheckoutSessionRequest, CheckoutSessionResponse, Product } from './types';
 
-const mockProduct: Product = {
-  id: 'diguifi-supporter-pack',
-  name: 'Diguifi Supporter Pack',
-  description: 'A mock product that validates authenticated checkout plumbing before Stripe goes live.',
-  priceLabel: '$4.99',
-  category: 'bundle'
-};
+function formatPrice(price: number, currency: string) {
+  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency }).format(price);
+}
 
 export function StorePage() {
   const { authState } = useAuth();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [checkingOut, setCheckingOut] = useState<string | null>(null);
 
-  const handleCheckout = async () => {
+  useEffect(() => {
+    apiClient.get<Product[]>('/api/produto')
+      .then(setProducts)
+      .catch(() => {})
+      .finally(() => setLoadingProducts(false));
+  }, []);
+
+  const handleCheckout = async (productId: string) => {
     if (authState !== 'authenticated') {
       setStatus('Login is required before starting checkout.');
       return;
     }
 
-    setIsLoading(true);
+    setCheckingOut(productId);
     setStatus(null);
 
     const payload: CheckoutSessionRequest = {
-      productId: mockProduct.id,
-      returnUrl: buildAbsoluteAppUrl('/store?checkout=success'),
+      productId,
+      returnUrl: buildAbsoluteAppUrl('/store?checkout=success&session_id={CHECKOUT_SESSION_ID}'),
       cancelUrl: buildAbsoluteAppUrl('/store?checkout=cancelled')
     };
 
@@ -37,11 +43,15 @@ export function StorePage() {
         '/api/produto/checkout-session',
         payload
       );
-      setStatus(`Checkout session created: ${response.checkoutUrl}`);
+      if (!response.checkoutUrl) {
+        setStatus('Checkout is temporarily unavailable.');
+        return;
+      }
+      redirectToUrl(response.checkoutUrl);
     } catch {
       setStatus('Checkout is temporarily unavailable.');
     } finally {
-      setIsLoading(false);
+      setCheckingOut(null);
     }
   };
 
@@ -50,24 +60,35 @@ export function StorePage() {
       <section className="section-heading">
         <p className="eyebrow">Storefront</p>
         <h1>Tiny Store</h1>
-        <p>
-          Any support is deeply appreciated!
-        </p>
+        <p>Any support is deeply appreciated!</p>
       </section>
 
-      <article className="product-card">
-        <div>
-          <p className="eyebrow">{mockProduct.category}</p>
-          <h2>{mockProduct.name}</h2>
-          <p>{mockProduct.description}</p>
-        </div>
-        <div className="product-meta">
-          <strong>{mockProduct.priceLabel}</strong>
-          <button type="button" className="primary-button" onClick={() => void handleCheckout()}>
-            {isLoading ? 'Starting checkout...' : 'Buy now'}
-          </button>
-        </div>
-      </article>
+      {loadingProducts ? (
+        <p>Loading...</p>
+      ) : products.length === 0 ? (
+        <p>No products available.</p>
+      ) : (
+        products.map(product => (
+          <article key={product.id} className="product-card">
+            <div>
+              <p className="eyebrow">{product.category}</p>
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+            </div>
+            <div className="product-meta">
+              <strong>{formatPrice(product.price, product.currency)}</strong>
+              <button
+                type="button"
+                className="primary-button"
+                onClick={() => void handleCheckout(product.id)}
+                disabled={product.isPurchased || checkingOut === product.id}
+              >
+                {product.isPurchased ? 'Purchased' : checkingOut === product.id ? 'Starting checkout...' : 'Buy now'}
+              </button>
+            </div>
+          </article>
+        ))
+      )}
 
       {status ? <p className="status-banner">{status}</p> : null}
     </div>

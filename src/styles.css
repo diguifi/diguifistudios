@@ -392,6 +392,125 @@ button {
   align-content: center;
 }
 
+.user-menu {
+  position: relative;
+}
+
+.user-menu-trigger {
+  cursor: pointer;
+  background: transparent;
+  color: var(--text);
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 160px;
+  background: var(--panel-strong);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.user-menu-item {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.95rem;
+  transition: background 160ms ease;
+}
+
+.user-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.user-menu-item--danger {
+  color: #ff8a8a;
+}
+
+.orders-list {
+  display: grid;
+  gap: 12px;
+}
+
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+}
+
+.order-info {
+  display: grid;
+  gap: 4px;
+}
+
+.order-product {
+  font-weight: 500;
+}
+
+.order-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.order-meta {
+  display: grid;
+  gap: 6px;
+  text-align: right;
+  align-items: center;
+}
+
+.order-amount {
+  font-weight: 600;
+}
+
+.order-status {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  justify-self: end;
+}
+
+.order-status--paid {
+  background: rgba(100, 200, 100, 0.15);
+  color: #7fca7f;
+}
+
+.order-status--pending {
+  background: rgba(255, 200, 80, 0.15);
+  color: #ffc84a;
+}
+
+.order-status--failed,
+.order-status--expired {
+  background: rgba(255, 100, 100, 0.15);
+  color: #ff8080;
+}
+
+.order-status--refunded {
+  background: rgba(136, 192, 255, 0.15);
+  color: var(--accent);
+}
+
 .status-banner {
   padding: 16px 18px;
   border-radius: 18px;

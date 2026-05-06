@@ -2,8 +2,11 @@ export interface Product {
   id: string;
   name: string;
   description: string;
-  priceLabel: string;
-  category: 'game' | 'service' | 'bundle';
+  price: number;
+  currency: string;
+  category: string;
+  isActive: boolean;
+  isPurchased: boolean;
 }
 
 export interface CheckoutSessionRequest {

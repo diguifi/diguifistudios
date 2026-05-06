@@ -11,6 +11,7 @@ import { apiClient, ApiError } from '../../shared/api/client';
 import {
   clearStoredSessionTokens,
   extractSessionTokens,
+  getStoredAccessToken,
   getStoredRefreshToken,
   hasStoredSessionTokens,
   storeSessionTokens
@@ -67,8 +68,33 @@ export function AuthProvider({ children }: PropsWithChildren) {
       return;
     }
 
-    void refreshSession();
-  }, [refreshSession]);
+    const accessToken = getStoredAccessToken();
+    const refreshToken = getStoredRefreshToken();
+
+    const restoreSession = async () => {
+      if (accessToken) {
+        try {
+          await loadMe();
+          return;
+        } catch (error) {
+          if (!(error instanceof ApiError) || error.status !== 401) {
+            throw error;
+          }
+        }
+      }
+
+      if (refreshToken) {
+        await refreshSession();
+        return;
+      }
+
+      clearStoredSessionTokens();
+      setUser(null);
+      setAuthState('anonymous');
+    };
+
+    void restoreSession();
+  }, [loadMe, refreshSession]);
 
   const loginWithGoogle = useCallback(
     async (payload: GoogleAuthPayload) => {

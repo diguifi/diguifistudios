@@ -6,6 +6,7 @@ export interface AuthUser {
   name: string;
   firstName?: string;
   avatarUrl?: string;
+  isAdmin: boolean;
 }
 
 export interface GoogleAuthPayload {

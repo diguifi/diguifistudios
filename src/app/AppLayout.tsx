@@ -7,7 +7,7 @@ const links = [
   { to: '/store', label: 'Store' }
 ] as const;
 
-function UserMenu({ name, logout }: { name: string; logout: () => void }) {
+function UserMenu({ name, isAdmin, logout }: { name: string; isAdmin: boolean; logout: () => void }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -35,6 +35,16 @@ function UserMenu({ name, logout }: { name: string; logout: () => void }) {
       </button>
       {open && (
         <div className="user-menu-dropdown" role="menu">
+          {isAdmin && (
+            <Link
+              to="/admin/products"
+              className="user-menu-item"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+            >
+              Admin
+            </Link>
+          )}
           <Link
             to="/orders"
             className="user-menu-item"
@@ -84,7 +94,11 @@ export function AppLayout() {
 
         <div className="session-actions">
           {authState === 'authenticated' && user ? (
-            <UserMenu name={user.firstName ?? user.name} logout={logout} />
+            <UserMenu
+              name={user.firstName ?? user.name}
+              isAdmin={user.isAdmin}
+              logout={logout}
+            />
           ) : authState === 'refreshing' || authState === 'authenticating' ? (
             <span className="user-chip">Restoring session...</span>
           ) : (

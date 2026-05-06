@@ -6,6 +6,8 @@ import { HomePage } from '../features/home/HomePage';
 import { LoginPage } from '../features/auth/LoginPage';
 import { StorePage } from '../features/store/StorePage';
 import { OrdersPage } from '../features/orders/OrdersPage';
+import { AdminProductsPage } from '../features/admin/AdminProductsPage';
+import { AdminProductFormPage } from '../features/admin/AdminProductFormPage';
 
 export const router = createHashRouter([
   {
@@ -31,6 +33,18 @@ export const router = createHashRouter([
       {
         path: 'orders',
         element: <OrdersPage />
+      },
+      {
+        path: 'admin/products',
+        element: <AdminProductsPage />
+      },
+      {
+        path: 'admin/products/new',
+        element: <AdminProductFormPage />
+      },
+      {
+        path: 'admin/products/:id/edit',
+        element: <AdminProductFormPage />
       },
       {
         path: '*',

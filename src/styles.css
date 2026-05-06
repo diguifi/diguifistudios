@@ -669,6 +669,170 @@ button {
   }
 }
 
+/* ── Admin ─────────────────────────────────────── */
+
+.admin-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-page-header h1 {
+  margin: 0;
+}
+
+.admin-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+}
+
+.admin-row-info {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.admin-row-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-row-slug {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.admin-row-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.admin-action-btn {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+
+.danger-button {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 100, 100, 0.35);
+  padding: 10px 16px;
+  background: transparent;
+  color: #ff8a8a;
+  cursor: pointer;
+  font: inherit;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.danger-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(255, 100, 100, 0.6);
+  background: rgba(255, 100, 100, 0.08);
+}
+
+.danger-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Admin form */
+
+.admin-form {
+  display: grid;
+  gap: 20px;
+  max-width: 860px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  background: var(--panel-strong);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+  transition: border-color 160ms ease;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-field select option {
+  background: var(--panel-strong);
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  user-select: none;
+}
+
+.form-checkbox input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.form-error {
+  color: #ff8a8a;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── Media queries ──────────────────────────────── */
+
 @media (max-width: 920px) {
   .site-header,
   .hero-section,

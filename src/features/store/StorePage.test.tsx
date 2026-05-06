@@ -14,7 +14,8 @@ const mockProducts: Product[] = [
     price: 10,
     currency: 'BRL',
     category: 'bundle',
-    isActive: true
+    isActive: true,
+    isPurchased: false
   }
 ];
 

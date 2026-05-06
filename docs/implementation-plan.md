@@ -14,7 +14,7 @@
   - `POST /api/auth/logout`
   - `GET /api/auth/me`
 - Store page with mock checkout request to `POST /api/produto/checkout-session`.
-- Shared API client, environment configuration, and local mock API support for development.
+- Shared API client and environment configuration for the live backend integration.
 - Test setup with `Vitest + Testing Library`.
 - GitHub Actions pipeline for `typecheck`, `test`, `build`, and GitHub Pages deployment.
 

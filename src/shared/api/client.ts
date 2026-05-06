@@ -1,4 +1,4 @@
-import { mockApiFetch } from './mock-api';
+import { getStoredAccessToken } from '../../features/auth/token-storage';
 
 export class ApiError extends Error {
   constructor(
@@ -11,20 +11,19 @@ export class ApiError extends Error {
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
-const ENABLE_API_MOCKS = import.meta.env.VITE_ENABLE_API_MOCKS === 'true';
 
 async function request<T>(path: string, init: RequestInit): Promise<T> {
   const url = `${API_BASE_URL}${path}`;
-  const response = ENABLE_API_MOCKS
-    ? await mockApiFetch(url, init)
-    : await fetch(url, {
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(init.headers ?? {})
-        },
-        ...init
-      });
+  const accessToken = getStoredAccessToken();
+  const response = await fetch(url, {
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+      ...(init.headers ?? {})
+    },
+    ...init
+  });
 
   if (!response.ok) {
     const text = await response.text();

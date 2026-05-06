@@ -15,18 +15,19 @@
     "ci": "npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.13.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.26.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.0.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "@eslint/js": "^9.26.0",
     "@vitejs/plugin-react": "^4.5.0",
     "eslint": "^9.26.0",
     "eslint-plugin-react-hooks": "^5.2.0",

@@ -8,43 +8,28 @@ import {
   useState
 } from 'react';
 import { apiClient, ApiError } from '../../shared/api/client';
-import type { AuthState, AuthUser, GoogleAuthPayload } from './types';
+import {
+  clearStoredSessionTokens,
+  extractSessionTokens,
+  getStoredRefreshToken,
+  hasStoredSessionTokens,
+  storeSessionTokens
+} from './token-storage';
+import type { AuthState, AuthUser, GoogleAuthPayload, GoogleLoginResult } from './types';
 
 interface AuthContextValue {
   authState: AuthState;
   user: AuthUser | null;
-  loginWithGoogle: (payload: GoogleAuthPayload) => Promise<void>;
+  loginWithGoogle: (payload: GoogleAuthPayload) => Promise<GoogleLoginResult>;
   refreshSession: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
-const AUTH_TOKEN_STORAGE_KEYS = ['jwt', 'token', 'accessToken', 'authToken'] as const;
-
-function hasStoredAuthToken() {
-  if (typeof window === 'undefined') {
-    return false;
-  }
-
-  return AUTH_TOKEN_STORAGE_KEYS.some((key) => {
-    const value = window.localStorage.getItem(key);
-    return typeof value === 'string' && value.trim().length > 0;
-  });
-}
-
-function clearStoredAuthTokens() {
-  if (typeof window === 'undefined') {
-    return;
-  }
-
-  AUTH_TOKEN_STORAGE_KEYS.forEach((key) => {
-    window.localStorage.removeItem(key);
-  });
-}
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [authState, setAuthState] = useState<AuthState>(() =>
-    hasStoredAuthToken() ? 'refreshing' : 'anonymous'
+    hasStoredSessionTokens() ? 'refreshing' : 'anonymous'
   );
   const [user, setUser] = useState<AuthUser | null>(null);
 
@@ -58,10 +43,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setAuthState((current) => (current === 'authenticated' ? 'refreshing' : current));
 
     try {
-      await apiClient.post('/api/auth/refresh', {});
+      const response = await apiClient.post<Record<string, unknown>>('/api/auth/refresh', {
+        refreshToken: getStoredRefreshToken()
+      });
+      storeSessionTokens(extractSessionTokens(response));
       await loadMe();
     } catch (error) {
-      clearStoredAuthTokens();
+      clearStoredSessionTokens();
       setUser(null);
       setAuthState('anonymous');
 
@@ -74,7 +62,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [loadMe]);
 
   useEffect(() => {
-    if (!hasStoredAuthToken()) {
+    if (!hasStoredSessionTokens()) {
       setAuthState('anonymous');
       return;
     }
@@ -85,17 +73,30 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const loginWithGoogle = useCallback(
     async (payload: GoogleAuthPayload) => {
       setAuthState('authenticating');
-      await apiClient.post('/api/auth/google', payload);
-      await loadMe();
+      try {
+        const response = await apiClient.post<Record<string, unknown>>('/api/auth/google', payload);
+        storeSessionTokens(extractSessionTokens(response));
+        await loadMe();
+        return {
+          needsFill: response.needsFill === true
+        };
+      } catch (error) {
+        clearStoredSessionTokens();
+        setUser(null);
+        setAuthState('anonymous');
+        throw error;
+      }
     },
     [loadMe]
   );
 
   const logout = useCallback(async () => {
     try {
-      await apiClient.post('/api/auth/logout', {});
+      await apiClient.post('/api/auth/logout', {
+        refreshToken: getStoredRefreshToken()
+      });
     } finally {
-      clearStoredAuthTokens();
+      clearStoredSessionTokens();
       setUser(null);
       setAuthState('anonymous');
     }

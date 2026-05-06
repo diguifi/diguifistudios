@@ -9,6 +9,7 @@ export interface AuthUser {
 }
 
 export interface GoogleAuthPayload {
+  idToken?: string;
   code?: string;
   credential?: string;
   state?: string;
@@ -16,5 +17,9 @@ export interface GoogleAuthPayload {
   authuser?: string;
   prompt?: string;
   error?: string;
-  callbackPath: string;
+  callbackPath?: string;
+}
+
+export interface GoogleLoginResult {
+  needsFill: boolean;
 }

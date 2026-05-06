@@ -1,6 +1,5 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../features/auth/auth-context';
-import { buildLoginHref } from '../shared/config';
 
 const links = [
   { to: '/', label: 'Portfolio' },
@@ -10,7 +9,7 @@ const links = [
 export function AppLayout() {
   const location = useLocation();
   const { authState, user, logout } = useAuth();
-  const loginHref = buildLoginHref(location.pathname);
+  const loginPath = `/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
 
   return (
     <div className="site-shell">
@@ -41,12 +40,12 @@ export function AppLayout() {
               </button>
             </>
           ) : (
-            <a
+            <Link
               className="primary-button"
-              href={loginHref}
+              to={loginPath}
             >
               Login with Google
-            </a>
+            </Link>
           )}
         </div>
       </header>

@@ -3,6 +3,7 @@ import { AppLayout } from './AppLayout';
 import { NotFoundPage } from './NotFoundPage';
 import { AuthCallbackPage } from '../features/auth/AuthCallbackPage';
 import { HomePage } from '../features/home/HomePage';
+import { LoginPage } from '../features/auth/LoginPage';
 import { StorePage } from '../features/store/StorePage';
 
 export const router = createHashRouter([
@@ -13,6 +14,10 @@ export const router = createHashRouter([
       {
         index: true,
         element: <HomePage />
+      },
+      {
+        path: 'login',
+        element: <LoginPage />
       },
       {
         path: 'auth/callback',

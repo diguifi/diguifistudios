@@ -1,16 +1,22 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as apiModule from '../../shared/api/client';
 import { AdminProductFormPage } from './AdminProductFormPage';
 import type { AdminProduct } from './types';
 
 const mockUseAuth = vi.fn();
+const { mockNavigate } = vi.hoisted(() => ({ mockNavigate: vi.fn() }));
 
 vi.mock('../auth/auth-context', () => ({
   useAuth: () => mockUseAuth()
 }));
+
+vi.mock('react-router-dom', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react-router-dom')>();
+  return { ...actual, useNavigate: () => mockNavigate };
+});
 
 const existingProduct: AdminProduct = {
   id: 'prod-1',
@@ -33,21 +39,23 @@ function adminAuthState() {
 }
 
 function renderCreate() {
-  const router = createMemoryRouter(
-    [{ path: '/admin/products/new', element: <AdminProductFormPage /> },
-     { path: '/admin/products', element: <div>Products list</div> }],
-    { initialEntries: ['/admin/products/new'] }
+  return render(
+    <MemoryRouter initialEntries={['/admin/products/new']}>
+      <Routes>
+        <Route path="/admin/products/new" element={<AdminProductFormPage />} />
+      </Routes>
+    </MemoryRouter>
   );
-  return render(<RouterProvider router={router} />);
 }
 
 function renderEdit(id = 'prod-1') {
-  const router = createMemoryRouter(
-    [{ path: '/admin/products/:id/edit', element: <AdminProductFormPage /> },
-     { path: '/admin/products', element: <div>Products list</div> }],
-    { initialEntries: [`/admin/products/${id}/edit`] }
+  return render(
+    <MemoryRouter initialEntries={[`/admin/products/${id}/edit`]}>
+      <Routes>
+        <Route path="/admin/products/:id/edit" element={<AdminProductFormPage />} />
+      </Routes>
+    </MemoryRouter>
   );
-  return render(<RouterProvider router={router} />);
 }
 
 beforeEach(() => {
@@ -113,7 +121,7 @@ describe('AdminProductFormPage', () => {
     await user.type(screen.getByLabelText('Description'), 'A description');
     await user.click(screen.getByRole('button', { name: 'Create' }));
 
-    expect(await screen.findByText('Products list')).toBeInTheDocument();
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/admin/products'));
     expect(apiModule.apiClient.post).toHaveBeenCalledWith(
       '/api/produto',
       expect.objectContaining({ name: 'New Product', slug: 'new-product' })
@@ -130,7 +138,7 @@ describe('AdminProductFormPage', () => {
     await screen.findByDisplayValue('Supporter Pack');
     await user.click(screen.getByRole('button', { name: 'Update' }));
 
-    expect(await screen.findByText('Products list')).toBeInTheDocument();
+    await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith('/admin/products'));
     expect(apiModule.apiClient.put).toHaveBeenCalledWith(
       '/api/produto/prod-1',
       expect.objectContaining({ name: 'Supporter Pack' })
@@ -177,7 +185,7 @@ describe('AdminProductFormPage', () => {
     await screen.findByRole('button', { name: 'Cancel' });
     await user.click(screen.getByRole('button', { name: 'Cancel' }));
 
-    expect(await screen.findByText('Products list')).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledWith('/admin/products');
   });
 
   it('updates form field values on change', async () => {

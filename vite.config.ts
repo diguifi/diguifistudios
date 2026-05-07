@@ -17,7 +17,26 @@ export default defineConfig(({ mode }) => {
       setupFiles: './src/test/setup.ts',
       css: true,
       coverage: {
-        reporter: ['text', 'html']
+        provider: 'v8',
+        reporter: ['text', 'html'],
+        include: ['src/**/*.{ts,tsx}'],
+        exclude: [
+          'src/main.tsx',
+          'src/app/router.tsx',
+          'src/**/*.d.ts',
+          'src/test/**',
+          'src/data/**',
+          'src/features/auth/types.ts',
+          'src/features/home/types.ts',
+          'src/features/orders/types.ts',
+          'src/features/store/types.ts'
+        ],
+        thresholds: {
+          lines: 90,
+          functions: 90,
+          branches: 90,
+          statements: 90
+        }
       }
     }
   };

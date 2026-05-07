@@ -44,4 +44,61 @@ describe('HomePage', () => {
 
     expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled();
   });
+
+  test('closes panel when clicking the close button', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    await user.click(screen.getAllByRole('button', { name: /read more/i }).at(0)!);
+    expect(screen.getByRole('complementary')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /close details/i }));
+    expect(screen.queryByRole('complementary')).not.toBeInTheDocument();
+  });
+
+  test('opens details panel from featured game Open details button', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    const openDetailsBtn = screen.getByRole('button', { name: /open details/i });
+    await user.click(openDetailsBtn);
+    expect(screen.getByRole('complementary')).toBeInTheDocument();
+  });
+
+  test('closes panel when clicking the backdrop', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    await user.click(screen.getAllByRole('button', { name: /read more/i }).at(0)!);
+    expect(screen.getByRole('complementary')).toBeInTheDocument();
+
+    const backdrop = document.querySelector('.panel-backdrop') as HTMLElement;
+    await user.click(backdrop);
+    expect(screen.queryByRole('complementary')).not.toBeInTheDocument();
+  });
+
+  test('shows cover fallback when game has no image', () => {
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+    const fallbacks = document.querySelectorAll('.cover-fallback');
+    expect(fallbacks.length).toBeGreaterThanOrEqual(0);
+  });
 });

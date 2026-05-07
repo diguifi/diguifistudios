@@ -113,7 +113,7 @@ describe('AdminProductsPage', () => {
     renderPage();
     await screen.findByText('Supporter Pack');
     const deleteButtons = screen.getAllByRole('button', { name: 'Delete' });
-    await user.click(deleteButtons[0]);
+    await user.click(deleteButtons[0]!);
     await waitFor(() => {
       expect(screen.queryByText('Supporter Pack')).not.toBeInTheDocument();
     });
@@ -128,7 +128,7 @@ describe('AdminProductsPage', () => {
     renderPage();
     await screen.findByText('Supporter Pack');
     const deleteButtons = screen.getAllByRole('button', { name: 'Delete' });
-    await user.click(deleteButtons[0]);
+    await user.click(deleteButtons[0]!);
     expect(deleteSpy).not.toHaveBeenCalled();
     expect(screen.getByText('Supporter Pack')).toBeInTheDocument();
   });
@@ -143,7 +143,7 @@ describe('AdminProductsPage', () => {
     renderPage();
     await screen.findByText('Supporter Pack');
     const deleteButtons = screen.getAllByRole('button', { name: 'Delete' });
-    await user.click(deleteButtons[0]);
+    await user.click(deleteButtons[0]!);
     await waitFor(() => {
       expect(alert).toHaveBeenCalledWith('Product has orders');
     });
@@ -157,7 +157,7 @@ describe('AdminProductsPage', () => {
     renderPage();
     await screen.findByText('Supporter Pack');
     const deleteButtons = screen.getAllByRole('button', { name: 'Delete' });
-    await user.click(deleteButtons[0]);
+    await user.click(deleteButtons[0]!);
     await waitFor(() => {
       expect(alert).toHaveBeenCalledWith('Erro ao excluir produto.');
     });

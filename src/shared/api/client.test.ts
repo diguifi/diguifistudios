@@ -43,22 +43,22 @@ describe('apiClient.get', () => {
     stubFetch(200, data);
     const result = await apiClient.get<typeof data>('/api/test');
     expect(result).toEqual(data);
-    const call = vi.mocked(fetch).mock.calls[0];
-    expect(String(call[0])).toMatch('/api/test');
+    const call = vi.mocked(fetch).mock.calls[0]!;
+    expect(String(call[0]!)).toMatch('/api/test');
     expect((call[1] as RequestInit).method).toBe('GET');
   });
 
   it('includes Content-Type header', async () => {
     stubFetch(200, {});
     await apiClient.get('/api/test');
-    const headers = (vi.mocked(fetch).mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+    const headers = (vi.mocked(fetch).mock.calls[0]![1] as RequestInit).headers as Record<string, string>;
     expect(headers['Content-Type']).toBe('application/json');
   });
 
   it('does not include Authorization header when no token stored', async () => {
     stubFetch(200, {});
     await apiClient.get('/api/test');
-    const headers = (vi.mocked(fetch).mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+    const headers = (vi.mocked(fetch).mock.calls[0]![1] as RequestInit).headers as Record<string, string>;
     expect(headers['Authorization']).toBeUndefined();
   });
 
@@ -66,7 +66,7 @@ describe('apiClient.get', () => {
     vi.mocked(tokenStorage.getStoredAccessToken).mockReturnValue('stored-token');
     stubFetch(200, {});
     await apiClient.get('/api/test');
-    const headers = (vi.mocked(fetch).mock.calls[0][1] as RequestInit).headers as Record<string, string>;
+    const headers = (vi.mocked(fetch).mock.calls[0]![1] as RequestInit).headers as Record<string, string>;
     expect(headers['Authorization']).toBe('Bearer stored-token');
   });
 
@@ -103,7 +103,7 @@ describe('apiClient.post', () => {
   it('sends POST with JSON body', async () => {
     stubFetch(200, { ok: true });
     await apiClient.post('/api/test', { name: 'payload' });
-    const call = vi.mocked(fetch).mock.calls[0];
+    const call = vi.mocked(fetch).mock.calls[0]!;
     expect((call[1] as RequestInit).method).toBe('POST');
     expect((call[1] as RequestInit).body).toBe(JSON.stringify({ name: 'payload' }));
   });
@@ -113,7 +113,7 @@ describe('apiClient.put', () => {
   it('sends PUT with JSON body', async () => {
     stubFetch(200, { ok: true });
     await apiClient.put('/api/test', { name: 'updated' });
-    const call = vi.mocked(fetch).mock.calls[0];
+    const call = vi.mocked(fetch).mock.calls[0]!;
     expect((call[1] as RequestInit).method).toBe('PUT');
     expect((call[1] as RequestInit).body).toBe(JSON.stringify({ name: 'updated' }));
   });
@@ -123,7 +123,7 @@ describe('apiClient.delete', () => {
   it('sends DELETE request', async () => {
     stubFetch(204, null);
     await apiClient.delete('/api/test');
-    const call = vi.mocked(fetch).mock.calls[0];
+    const call = vi.mocked(fetch).mock.calls[0]!;
     expect((call[1] as RequestInit).method).toBe('DELETE');
   });
 

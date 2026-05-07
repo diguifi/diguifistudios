@@ -56,7 +56,7 @@ describe('OrdersPage', () => {
 
   it('renders unknown status as-is', async () => {
     const withUnknown: Order[] = [
-      { ...orders[0], status: 'refunded' }
+      { ...orders[0]!, status: 'refunded' }
     ];
     vi.spyOn(apiModule.apiClient, 'get').mockResolvedValue(withUnknown);
     render(<OrdersPage />);

@@ -10,6 +10,7 @@ interface Props {
 export function OrderActions({ order }: Props) {
   if (order.status !== 'paid') return null;
   if (order.productCategory !== 'subscription' && order.productCategory !== 'bundle') return null;
+  if (order.productCategory === 'subscription' && order.cancelAtPeriodEnd) return null;
 
   return (
     <KebabMenu>

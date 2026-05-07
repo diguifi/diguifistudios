@@ -179,6 +179,7 @@ describe('OrderActions', () => {
       currency: 'BRL',
       createdAt: '2026-01-01T00:00:00Z',
       paidAt: '2026-01-01T01:00:00Z',
+      cancelAtPeriodEnd: false,
       ...overrides,
     };
   }

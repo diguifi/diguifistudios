@@ -7,4 +7,5 @@ export interface Order {
   currency: string;
   createdAt: string;
   paidAt: string | null;
+  cancelAtPeriodEnd: boolean;
 }

@@ -13,7 +13,8 @@ const orders: Order[] = [
     amount: 100,
     currency: 'BRL',
     createdAt: '2024-06-15T10:00:00Z',
-    paidAt: '2024-06-15T10:01:00Z'
+    paidAt: '2024-06-15T10:01:00Z',
+    cancelAtPeriodEnd: false
   },
   {
     id: 'order-2',
@@ -23,7 +24,8 @@ const orders: Order[] = [
     amount: 50,
     currency: 'BRL',
     createdAt: '2024-07-01T08:00:00Z',
-    paidAt: null
+    paidAt: null,
+    cancelAtPeriodEnd: false
   }
 ];
 

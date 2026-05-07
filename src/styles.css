@@ -511,6 +511,11 @@ button {
   color: var(--accent);
 }
 
+.order-status--cancelling {
+  background: rgba(255, 160, 80, 0.15);
+  color: #ffa04a;
+}
+
 .order-kebab {
   position: relative;
 }

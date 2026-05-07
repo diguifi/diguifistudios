@@ -53,6 +53,9 @@ export function OrdersPage() {
                 <span className={`order-status order-status--${order.status}`}>
                   {statusLabel[order.status] ?? order.status}
                 </span>
+                {order.cancelAtPeriodEnd && (
+                  <span className="order-status order-status--cancelling">Cancels at period end</span>
+                )}
                 <span className="order-amount">{formatPrice(order.amount, order.currency)}</span>
               </div>
               <OrderActions order={order} />

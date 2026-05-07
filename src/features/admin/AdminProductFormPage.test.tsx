@@ -127,7 +127,7 @@ describe('AdminProductFormPage', () => {
     vi.spyOn(apiModule.apiClient, 'put').mockResolvedValue({});
     renderEdit('prod-1');
 
-    await screen.findByRole('button', { name: 'Update' });
+    await screen.findByDisplayValue('Supporter Pack');
     await user.click(screen.getByRole('button', { name: 'Update' }));
 
     expect(await screen.findByText('Products list')).toBeInTheDocument();

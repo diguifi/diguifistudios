@@ -8,6 +8,7 @@ const orders: Order[] = [
   {
     id: 'order-1',
     productName: 'Supporter Pack',
+    productCategory: 'subscription',
     status: 'paid',
     amount: 100,
     currency: 'BRL',
@@ -17,6 +18,7 @@ const orders: Order[] = [
   {
     id: 'order-2',
     productName: 'Bundle Deal',
+    productCategory: 'bundle',
     status: 'pending',
     amount: 50,
     currency: 'BRL',

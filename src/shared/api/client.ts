@@ -41,7 +41,7 @@ export const apiClient = {
   get<T>(path: string) {
     return request<T>(path, { method: 'GET' });
   },
-  post<T>(path: string, body: unknown) {
+  post<T>(path: string, body?: unknown) {
     return request<T>(path, { method: 'POST', body: JSON.stringify(body) });
   },
   put<T>(path: string, body: unknown) {

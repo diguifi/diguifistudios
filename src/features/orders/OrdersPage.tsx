@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiClient } from '../../shared/api/client';
+import { OrderActions } from './OrderActions';
 import type { Order } from './types';
 
 const statusLabel: Record<string, string> = {
@@ -54,6 +55,7 @@ export function OrdersPage() {
                 </span>
                 <span className="order-amount">{formatPrice(order.amount, order.currency)}</span>
               </div>
+              <OrderActions order={order} />
             </div>
           ))}
         </div>

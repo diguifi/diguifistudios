@@ -447,7 +447,7 @@ button {
 
 .order-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   gap: 16px;
   align-items: center;
   padding: 20px 24px;
@@ -509,6 +509,77 @@ button {
 .order-status--refunded {
   background: rgba(136, 192, 255, 0.15);
   color: var(--accent);
+}
+
+.order-kebab {
+  position: relative;
+}
+
+.order-kebab-trigger {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.order-kebab-trigger:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.order-kebab-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 180px;
+  background: var(--panel-strong);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 8px;
+  display: grid;
+  gap: 2px;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+.order-kebab-item {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.92rem;
+  transition: background 160ms ease;
+}
+
+.order-kebab-item:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.order-kebab-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.order-kebab-item--danger {
+  color: #ff8a8a;
 }
 
 .status-banner {

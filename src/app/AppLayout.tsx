@@ -42,7 +42,17 @@ function UserMenu({ name, isAdmin, logout }: { name: string; isAdmin: boolean; l
               role="menuitem"
               onClick={() => setOpen(false)}
             >
-              Admin
+              Products
+            </Link>
+          )}
+          {isAdmin && (
+            <Link
+              to="/admin/bundles"
+              className="user-menu-item"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+            >
+              Bundles
             </Link>
           )}
           <Link

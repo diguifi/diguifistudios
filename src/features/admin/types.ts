@@ -29,3 +29,17 @@ export const PRODUCT_CATEGORIES = [
   { label: 'Subscription', value: 2, key: 'subscription' },
   { label: 'Donation', value: 3, key: 'donation' }
 ] as const;
+
+export interface AdminBundle {
+  productId: string;
+  productName: string;
+  driveUrl: string;
+  fileName: string;
+  updatedAt: string;
+}
+
+export interface BundleFormData {
+  productId: string;
+  driveUrl: string;
+  fileName: string;
+}

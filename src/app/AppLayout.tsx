@@ -55,6 +55,16 @@ function UserMenu({ name, isAdmin, logout }: { name: string; isAdmin: boolean; l
               Bundles
             </Link>
           )}
+          {isAdmin && (
+            <Link
+              to="/admin/game-notion-players"
+              className="user-menu-item"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+            >
+              Game Notion Players
+            </Link>
+          )}
           <Link
             to="/orders"
             className="user-menu-item"

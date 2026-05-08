@@ -40,7 +40,7 @@ export function AdminBundleFormPage() {
         .finally(() => setLoading(false));
     } else {
       apiClient
-        .get<AdminProduct[]>('/api/produto')
+        .get<AdminProduct[]>('/api/produto?includeInactive=true')
         .then(products => setBundleProducts(products.filter(p => p.category === 'bundle')))
         .catch(() => {})
         .finally(() => setLoading(false));

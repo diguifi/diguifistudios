@@ -10,6 +10,8 @@ import { AdminProductsPage } from '../features/admin/AdminProductsPage';
 import { AdminProductFormPage } from '../features/admin/AdminProductFormPage';
 import { AdminBundlesPage } from '../features/admin/AdminBundlesPage';
 import { AdminBundleFormPage } from '../features/admin/AdminBundleFormPage';
+import { AdminGameNotionPlayersPage } from '../features/admin/AdminGameNotionPlayersPage';
+import { AdminGameNotionPlayerFormPage } from '../features/admin/AdminGameNotionPlayerFormPage';
 
 export const router = createHashRouter([
   {
@@ -59,6 +61,18 @@ export const router = createHashRouter([
       {
         path: 'admin/bundles/:productId/edit',
         element: <AdminBundleFormPage />
+      },
+      {
+        path: 'admin/game-notion-players',
+        element: <AdminGameNotionPlayersPage />
+      },
+      {
+        path: 'admin/game-notion-players/new',
+        element: <AdminGameNotionPlayerFormPage />
+      },
+      {
+        path: 'admin/game-notion-players/:playerId/edit',
+        element: <AdminGameNotionPlayerFormPage />
       },
       {
         path: '*',

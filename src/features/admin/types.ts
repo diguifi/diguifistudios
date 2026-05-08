@@ -43,3 +43,13 @@ export interface BundleFormData {
   driveUrl: string;
   fileName: string;
 }
+
+export interface AdminGameNotionPlayer {
+  playerId: string;
+  lastPing: string;
+}
+
+export interface GameNotionPlayerFormData {
+  playerId: string;
+  lastPing: string;
+}

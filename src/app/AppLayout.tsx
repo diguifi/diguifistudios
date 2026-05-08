@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../features/auth/auth-context';
 
 const links = [
@@ -65,6 +65,16 @@ function UserMenu({ name, isAdmin, logout }: { name: string; isAdmin: boolean; l
               Game Notion Players
             </Link>
           )}
+          {isAdmin && (
+            <Link
+              to="/admin/notifications"
+              className="user-menu-item"
+              role="menuitem"
+              onClick={() => setOpen(false)}
+            >
+              Notifications
+            </Link>
+          )}
           <Link
             to="/orders"
             className="user-menu-item"
@@ -87,9 +97,31 @@ function UserMenu({ name, isAdmin, logout }: { name: string; isAdmin: boolean; l
   );
 }
 
+function BellButton({ hasNotification }: { hasNotification: boolean }) {
+  const navigate = useNavigate();
+  return (
+    <button
+      type="button"
+      className="bell-btn"
+      aria-label="Notifications"
+      onClick={() => navigate('/notifications')}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      </svg>
+      {hasNotification && <span className="bell-dot" aria-hidden="true" />}
+    </button>
+  );
+}
+
 export function AppLayout() {
   const location = useLocation();
-  const { authState, user, logout } = useAuth();
+  const { authState, user, logout, checkNotifications } = useAuth();
+
+  useEffect(() => {
+    void checkNotifications();
+  }, [location.pathname, checkNotifications]);
   const loginPath = `/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
 
   return (
@@ -114,11 +146,14 @@ export function AppLayout() {
 
         <div className="session-actions">
           {authState === 'authenticated' && user ? (
-            <UserMenu
-              name={user.firstName ?? user.name}
-              isAdmin={user.isAdmin}
-              logout={logout}
-            />
+            <>
+              <BellButton hasNotification={user.hasNotification} />
+              <UserMenu
+                name={user.firstName ?? user.name}
+                isAdmin={user.isAdmin}
+                logout={logout}
+              />
+            </>
           ) : authState === 'refreshing' || authState === 'authenticating' ? (
             <span className="user-chip">Restoring session...</span>
           ) : (

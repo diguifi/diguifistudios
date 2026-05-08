@@ -23,6 +23,8 @@ interface AuthContextValue {
   user: AuthUser | null;
   loginWithGoogle: (payload: GoogleAuthPayload) => Promise<GoogleLoginResult>;
   refreshSession: () => Promise<void>;
+  reloadUser: () => Promise<void>;
+  checkNotifications: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -116,6 +118,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     [loadMe]
   );
 
+  const checkNotifications = useCallback(async () => {
+    if (!user) return;
+    try {
+      const hasNotification = await apiClient.get<boolean>('/api/my/notifications/check');
+      setUser(prev => prev ? { ...prev, hasNotification } : prev);
+    } catch {
+      // silently ignore — bell state is non-critical
+    }
+  }, [user]);
+
   const logout = useCallback(async () => {
     try {
       await apiClient.post('/api/auth/logout', {
@@ -134,9 +146,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
       user,
       loginWithGoogle,
       refreshSession,
+      reloadUser: loadMe,
+      checkNotifications,
       logout
     }),
-    [authState, loginWithGoogle, logout, refreshSession, user]
+    [authState, checkNotifications, loginWithGoogle, loadMe, logout, refreshSession, user]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

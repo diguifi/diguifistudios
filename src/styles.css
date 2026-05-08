@@ -134,6 +134,77 @@ button {
   cursor: default;
 }
 
+.bell-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.bell-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.bell-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff4040;
+  border: 2px solid #070b14;
+}
+
+.notification-list {
+  display: grid;
+  gap: 12px;
+}
+
+.notification-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+}
+
+.notification-row--read {
+  opacity: 0.55;
+}
+
+.notification-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-text {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+}
+
+.notification-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.notification-link {
+  color: var(--accent);
+}
+
 .page-stack {
   display: grid;
   gap: 32px;

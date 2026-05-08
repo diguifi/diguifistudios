@@ -53,3 +53,19 @@ export interface GameNotionPlayerFormData {
   playerId: string;
   lastPing: string;
 }
+
+export interface AdminNotification {
+  id: string;
+  userId: string;
+  text: string;
+  path: string | null;
+  createdAt: string;
+  isRead: boolean;
+}
+
+export interface NotificationFormData {
+  userId: string;
+  text: string;
+  path: string;
+  isRead: boolean;
+}

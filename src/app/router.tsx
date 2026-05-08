@@ -12,6 +12,9 @@ import { AdminBundlesPage } from '../features/admin/AdminBundlesPage';
 import { AdminBundleFormPage } from '../features/admin/AdminBundleFormPage';
 import { AdminGameNotionPlayersPage } from '../features/admin/AdminGameNotionPlayersPage';
 import { AdminGameNotionPlayerFormPage } from '../features/admin/AdminGameNotionPlayerFormPage';
+import { AdminNotificationsPage } from '../features/admin/AdminNotificationsPage';
+import { AdminNotificationFormPage } from '../features/admin/AdminNotificationFormPage';
+import { NotificationsPage } from '../features/notifications/NotificationsPage';
 
 export const router = createHashRouter([
   {
@@ -73,6 +76,22 @@ export const router = createHashRouter([
       {
         path: 'admin/game-notion-players/:playerId/edit',
         element: <AdminGameNotionPlayerFormPage />
+      },
+      {
+        path: 'admin/notifications',
+        element: <AdminNotificationsPage />
+      },
+      {
+        path: 'admin/notifications/new',
+        element: <AdminNotificationFormPage />
+      },
+      {
+        path: 'admin/notifications/:id/edit',
+        element: <AdminNotificationFormPage />
+      },
+      {
+        path: 'notifications',
+        element: <NotificationsPage />
       },
       {
         path: '*',

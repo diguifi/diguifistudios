@@ -119,14 +119,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
   );
 
   const checkNotifications = useCallback(async () => {
-    if (!user) return;
+    if (authState !== 'authenticated') return;
     try {
       const hasNotification = await apiClient.get<boolean>('/api/my/notifications/check');
       setUser(prev => prev ? { ...prev, hasNotification } : prev);
     } catch {
       // silently ignore — bell state is non-critical
     }
-  }, [user]);
+  }, [authState]);
 
   const logout = useCallback(async () => {
     try {

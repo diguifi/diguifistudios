@@ -17,7 +17,7 @@ export function AdminProductsPage() {
   useEffect(() => {
     if (!isAdmin) return;
     apiClient
-      .get<AdminProduct[]>('/api/produto')
+      .get<AdminProduct[]>('/api/produto?includeInactive=true')
       .then(setProducts)
       .catch(() => {})
       .finally(() => setLoading(false));

@@ -1,5 +1,6 @@
+import type { FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { apiClient } from '../../shared/api/client';
+import { apiClient, ApiError } from '../../shared/api/client';
 import { redirectToUrl } from '../../shared/navigation';
 import type { Order } from './types';
 
@@ -8,19 +9,36 @@ interface Props {
 }
 
 export function OrderActions({ order }: Props) {
+  const [setIdOpen, setSetIdOpen] = useState(false);
+
   if (order.status !== 'paid') return null;
   if (order.productCategory !== 'subscription' && order.productCategory !== 'bundle') return null;
   if (order.productCategory === 'subscription' && order.cancelAtPeriodEnd) return null;
 
+  const isGameNotion = order.productCategory === 'bundle' && order.bundleType === 'gamenotion';
+
   return (
-    <KebabMenu>
-      {order.productCategory === 'subscription' && (
-        <CancelSubscriptionItem orderId={order.id} />
+    <>
+      <KebabMenu>
+        {order.productCategory === 'subscription' && (
+          <CancelSubscriptionItem orderId={order.id} />
+        )}
+        {order.productCategory === 'bundle' && (
+          <DownloadBundleItem orderId={order.id} />
+        )}
+        {isGameNotion && (
+          <button
+            className="order-kebab-item"
+            onClick={() => setSetIdOpen(true)}
+          >
+            Set Id
+          </button>
+        )}
+      </KebabMenu>
+      {isGameNotion && setIdOpen && (
+        <SetGameNotionIdModal onClose={() => setSetIdOpen(false)} />
       )}
-      {order.productCategory === 'bundle' && (
-        <DownloadBundleItem orderId={order.id} />
-      )}
-    </KebabMenu>
+    </>
   );
 }
 
@@ -116,5 +134,60 @@ function DownloadBundleItem({ orderId }: { orderId: string }) {
       </button>
       {error && <p role="alert">{error}</p>}
     </>
+  );
+}
+
+function SetGameNotionIdModal({ onClose }: { onClose: () => void }) {
+  const [playerId, setPlayerId] = useState('');
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    setSending(true);
+    setError(null);
+    try {
+      await apiClient.put('/api/game-notion-players/me', { playerId });
+      onClose();
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'Failed to set Player ID. Please try again.');
+    } finally {
+      setSending(false);
+    }
+  }
+
+  return (
+    <div
+      className="modal-backdrop"
+      role="presentation"
+      onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div role="dialog" aria-modal="true" aria-labelledby="set-id-title" className="modal">
+        <h2 id="set-id-title">Set Player ID</h2>
+        <form onSubmit={e => void handleSubmit(e)}>
+          <div className="form-field">
+            <label htmlFor="player-id-input">Player ID</label>
+            <input
+              id="player-id-input"
+              type="text"
+              value={playerId}
+              onChange={e => setPlayerId(e.target.value)}
+              required
+              maxLength={100}
+              autoFocus
+            />
+          </div>
+          {error && <p role="alert">{error}</p>}
+          <div className="form-actions">
+            <button type="submit" className="primary-button" disabled={sending}>
+              {sending ? 'Sending...' : 'Send'}
+            </button>
+            <button type="button" className="ghost-button" onClick={onClose}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }

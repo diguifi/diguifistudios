@@ -167,6 +167,94 @@ describe('OrderActions', () => {
     expect(screen.getByRole('button', { name: /download bundle/i })).toBeDisabled();
   });
 
+  // ── SetGameNotionId ───────────────────────────────────────────────────────
+
+  it('renders Set Id button for paid gamenotion bundle order', async () => {
+    const user = userEvent.setup();
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    expect(screen.getByRole('button', { name: /set id/i })).toBeInTheDocument();
+  });
+
+  it('does not render Set Id button when bundleType is null', async () => {
+    const user = userEvent.setup();
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: null, status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    expect(screen.queryByRole('button', { name: /set id/i })).not.toBeInTheDocument();
+  });
+
+  it('opens modal when Set Id is clicked', async () => {
+    const user = userEvent.setup();
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+  });
+
+  it('calls PUT /api/game-notion-players/me with entered playerId on Send', async () => {
+    const user = userEvent.setup();
+    const putSpy = vi.spyOn(apiModule.apiClient, 'put').mockResolvedValue(undefined);
+
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    await user.type(screen.getByRole('textbox'), 'my-game-id');
+    await user.click(screen.getByRole('button', { name: /^send$/i }));
+
+    expect(putSpy).toHaveBeenCalledWith('/api/game-notion-players/me', { playerId: 'my-game-id' });
+  });
+
+  it('closes modal on successful send', async () => {
+    const user = userEvent.setup();
+    vi.spyOn(apiModule.apiClient, 'put').mockResolvedValue(undefined);
+
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    await user.type(screen.getByRole('textbox'), 'my-game-id');
+    await user.click(screen.getByRole('button', { name: /^send$/i }));
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  it('shows error alert when send fails', async () => {
+    const user = userEvent.setup();
+    vi.spyOn(apiModule.apiClient, 'put').mockRejectedValue(new Error('Server error'));
+
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    await user.type(screen.getByRole('textbox'), 'my-game-id');
+    await user.click(screen.getByRole('button', { name: /^send$/i }));
+
+    expect(await screen.findByRole('alert')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+
+  it('disables Send button while request is in flight', async () => {
+    const user = userEvent.setup();
+    vi.spyOn(apiModule.apiClient, 'put').mockReturnValue(new Promise(() => {}));
+
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    await user.type(screen.getByRole('textbox'), 'my-game-id');
+    await user.click(screen.getByRole('button', { name: /^send$/i }));
+
+    expect(screen.getByRole('button', { name: /sending/i })).toBeDisabled();
+  });
+
+  it('closes modal when Cancel is clicked', async () => {
+    const user = userEvent.setup();
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    await user.click(screen.getByRole('button', { name: /cancel/i }));
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
   // ── Helper ────────────────────────────────────────────────────────────────
 
   function buildOrder(overrides: Partial<Order> = {}): Order {
@@ -174,6 +262,7 @@ describe('OrderActions', () => {
       id: 'order-001',
       productName: 'Test Product',
       productCategory: 'subscription',
+      bundleType: null,
       status: 'paid',
       amount: 99.90,
       currency: 'BRL',

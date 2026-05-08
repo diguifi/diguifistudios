@@ -74,7 +74,7 @@ describe('AppLayout', () => {
     expect(screen.getByRole('menuitem', { name: 'Logout' })).toBeInTheDocument();
   });
 
-  it('shows Admin menu item when isAdmin is true', async () => {
+  it('shows admin menu items when isAdmin is true', async () => {
     const user = userEvent.setup();
     mockUseAuth.mockReturnValue({
       authState: 'authenticated',
@@ -83,10 +83,12 @@ describe('AppLayout', () => {
     });
     renderLayout();
     await user.click(screen.getByRole('button', { name: 'SuperAdmin' }));
-    expect(screen.getByRole('menuitem', { name: 'Admin' })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: 'Products' })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: 'Bundles' })).toBeInTheDocument();
+    expect(screen.getByRole('menuitem', { name: 'Game Notion Players' })).toBeInTheDocument();
   });
 
-  it('does not show Admin menu item when isAdmin is false', async () => {
+  it('does not show admin menu items when isAdmin is false', async () => {
     const user = userEvent.setup();
     mockUseAuth.mockReturnValue({
       authState: 'authenticated',
@@ -95,7 +97,9 @@ describe('AppLayout', () => {
     });
     renderLayout();
     await user.click(screen.getByRole('button', { name: 'Regular' }));
-    expect(screen.queryByRole('menuitem', { name: 'Admin' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: 'Products' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: 'Bundles' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('menuitem', { name: 'Game Notion Players' })).not.toBeInTheDocument();
   });
 
   it('calls logout when Logout is clicked', async () => {

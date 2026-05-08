@@ -141,6 +141,7 @@ function SetGameNotionIdModal({ onClose }: { onClose: () => void }) {
   const [playerId, setPlayerId] = useState('');
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -148,7 +149,7 @@ function SetGameNotionIdModal({ onClose }: { onClose: () => void }) {
     setError(null);
     try {
       await apiClient.put('/api/game-notion-players/me', { playerId });
-      onClose();
+      setSuccess(true);
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Failed to set Player ID. Please try again.');
     } finally {
@@ -164,29 +165,40 @@ function SetGameNotionIdModal({ onClose }: { onClose: () => void }) {
     >
       <div role="dialog" aria-modal="true" aria-labelledby="set-id-title" className="modal">
         <h2 id="set-id-title">Set Player ID</h2>
-        <form onSubmit={e => void handleSubmit(e)}>
-          <div className="form-field">
-            <label htmlFor="player-id-input">Player ID</label>
-            <input
-              id="player-id-input"
-              type="text"
-              value={playerId}
-              onChange={e => setPlayerId(e.target.value)}
-              required
-              maxLength={100}
-              autoFocus
-            />
-          </div>
-          {error && <p role="alert">{error}</p>}
-          <div className="form-actions">
-            <button type="submit" className="primary-button" disabled={sending}>
-              {sending ? 'Sending...' : 'Send'}
-            </button>
-            <button type="button" className="ghost-button" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
-        </form>
+        {success ? (
+          <>
+            <p role="status">Player ID set successfully!</p>
+            <div className="form-actions">
+              <button type="button" className="primary-button" onClick={onClose}>
+                Close
+              </button>
+            </div>
+          </>
+        ) : (
+          <form onSubmit={e => void handleSubmit(e)}>
+            <div className="form-field">
+              <label htmlFor="player-id-input">Player ID</label>
+              <input
+                id="player-id-input"
+                type="text"
+                value={playerId}
+                onChange={e => setPlayerId(e.target.value)}
+                required
+                maxLength={100}
+                autoFocus
+              />
+            </div>
+            {error && <p role="alert">{error}</p>}
+            <div className="form-actions">
+              <button type="submit" className="primary-button" disabled={sending}>
+                {sending ? 'Sending...' : 'Send'}
+              </button>
+              <button type="button" className="ghost-button" onClick={onClose}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

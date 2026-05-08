@@ -205,7 +205,7 @@ describe('OrderActions', () => {
     expect(putSpy).toHaveBeenCalledWith('/api/game-notion-players/me', { playerId: 'my-game-id' });
   });
 
-  it('closes modal on successful send', async () => {
+  it('shows success message after successful send', async () => {
     const user = userEvent.setup();
     vi.spyOn(apiModule.apiClient, 'put').mockResolvedValue(undefined);
 
@@ -214,6 +214,22 @@ describe('OrderActions', () => {
     await user.click(screen.getByRole('button', { name: /set id/i }));
     await user.type(screen.getByRole('textbox'), 'my-game-id');
     await user.click(screen.getByRole('button', { name: /^send$/i }));
+
+    expect(await screen.findByRole('status')).toBeInTheDocument();
+    expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+
+  it('closes modal when Close is clicked after success', async () => {
+    const user = userEvent.setup();
+    vi.spyOn(apiModule.apiClient, 'put').mockResolvedValue(undefined);
+
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+    await user.type(screen.getByRole('textbox'), 'my-game-id');
+    await user.click(screen.getByRole('button', { name: /^send$/i }));
+    await screen.findByRole('status');
+    await user.click(screen.getByRole('button', { name: /^close$/i }));
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });

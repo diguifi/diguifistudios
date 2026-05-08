@@ -79,7 +79,7 @@ export function StorePage() {
               <strong>{formatPrice(product.price, product.currency)}</strong>
               <button
                 type="button"
-                className="primary-button"
+                className={`primary-button${product.isPurchased ? ' primary-button--purchased' : ''}`}
                 onClick={() => void handleCheckout(product.id)}
                 disabled={product.isPurchased || checkingOut === product.id}
               >

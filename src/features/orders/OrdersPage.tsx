@@ -38,7 +38,21 @@ export function OrdersPage() {
       </section>
 
       {loading ? (
-        <p>Loading...</p>
+        <div className="orders-list">
+          {[0, 1, 2, 3].map(i => (
+            <div key={i} className="order-row">
+              <div className="order-info">
+                <div className="skeleton skeleton-text" />
+                <div className="skeleton skeleton-text skeleton-text--short" style={{ marginTop: 6 }} />
+              </div>
+              <div className="order-meta">
+                <div className="skeleton skeleton-text skeleton-text--short" />
+                <div className="skeleton skeleton-price" />
+              </div>
+              <div className="skeleton skeleton-btn" />
+            </div>
+          ))}
+        </div>
       ) : orders.length === 0 ? (
         <p style={{ color: 'var(--muted)' }}>No orders yet.</p>
       ) : (

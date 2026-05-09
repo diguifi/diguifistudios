@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { apiClient } from '../../shared/api/client';
 import { loadGamesCatalog } from './catalog';
 import type { GameEntry } from './types';
 
@@ -62,6 +63,10 @@ export function HomePage() {
   const games = useMemo(() => loadGamesCatalog(), []);
   const featuredGame = games.find((game) => game.highlight) ?? games[0];
   const [selectedGame, setSelectedGame] = useState<GameEntry | null>(null);
+
+  useEffect(() => {
+    void apiClient.get('/ping').catch(() => {});
+  }, []);
 
   const scrollToCatalog = () => {
     document.getElementById('game-grid')?.scrollIntoView({

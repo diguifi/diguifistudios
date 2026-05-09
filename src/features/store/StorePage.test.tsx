@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, test, vi } from 'vitest';
+import { beforeEach, describe, expect, test, vi } from 'vitest';
 import * as apiModule from '../../shared/api/client';
 import * as navigationModule from '../../shared/navigation';
 import { StorePage } from './StorePage';
@@ -19,14 +19,25 @@ const mockProducts: Product[] = [
   }
 ];
 
+const mockNavigate = vi.fn();
+
+vi.mock('react-router-dom', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react-router-dom')>();
+  return { ...actual, useNavigate: () => mockNavigate };
+});
+
 let authState: 'anonymous' | 'authenticated' = 'anonymous';
 
 vi.mock('../auth/auth-context', () => ({
   useAuth: () => ({ authState })
 }));
 
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
 describe('StorePage', () => {
-  test('blocks checkout for anonymous users', async () => {
+  test('redirects anonymous users to login when clicking Buy', async () => {
     authState = 'anonymous';
     const user = userEvent.setup();
     vi.spyOn(apiModule.apiClient, 'get').mockResolvedValue(mockProducts);
@@ -36,7 +47,7 @@ describe('StorePage', () => {
     await screen.findByRole('button', { name: /buy now/i });
     await user.click(screen.getByRole('button', { name: /buy now/i }));
 
-    expect(screen.getByText(/login is required before starting checkout/i)).toBeInTheDocument();
+    expect(mockNavigate).toHaveBeenCalledWith('/login?next=%2Fstore');
     expect(postSpy).not.toHaveBeenCalled();
   });
 

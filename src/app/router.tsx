@@ -15,6 +15,7 @@ import { AdminGameNotionPlayerFormPage } from '../features/admin/AdminGameNotion
 import { AdminNotificationsPage } from '../features/admin/AdminNotificationsPage';
 import { AdminNotificationFormPage } from '../features/admin/AdminNotificationFormPage';
 import { NotificationsPage } from '../features/notifications/NotificationsPage';
+import { PrivacyPage } from '../features/legal/PrivacyPage';
 
 export const router = createHashRouter([
   {
@@ -92,6 +93,10 @@ export const router = createHashRouter([
       {
         path: 'notifications',
         element: <NotificationsPage />
+      },
+      {
+        path: 'privacy',
+        element: <PrivacyPage />
       },
       {
         path: '*',

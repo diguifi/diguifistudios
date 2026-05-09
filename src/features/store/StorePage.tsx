@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/auth-context';
 import { apiClient } from '../../shared/api/client';
 import { buildAbsoluteAppUrl } from '../../shared/config';
@@ -11,6 +12,7 @@ function formatPrice(price: number, currency: string) {
 
 export function StorePage() {
   const { authState } = useAuth();
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
@@ -25,7 +27,7 @@ export function StorePage() {
 
   const handleCheckout = async (productId: string) => {
     if (authState !== 'authenticated') {
-      setStatus('Login is required before starting checkout.');
+      navigate(`/login?next=${encodeURIComponent('/store')}`);
       return;
     }
 
@@ -64,7 +66,22 @@ export function StorePage() {
       </section>
 
       {loadingProducts ? (
-        <p>Loading...</p>
+        <div className="store-skeleton">
+          {[0, 1, 2].map(i => (
+            <article key={i} className="product-card">
+              <div className="store-skeleton-info">
+                <div className="skeleton skeleton-text skeleton-text--short" />
+                <div className="skeleton skeleton-text skeleton-text--long" style={{ height: '1.4em', marginTop: 6 }} />
+                <div className="skeleton skeleton-text" style={{ marginTop: 8 }} />
+                <div className="skeleton skeleton-text skeleton-text--long" style={{ marginTop: 4 }} />
+              </div>
+              <div className="product-meta">
+                <div className="skeleton skeleton-price" />
+                <div className="skeleton skeleton-btn" />
+              </div>
+            </article>
+          ))}
+        </div>
       ) : products.length === 0 ? (
         <p>No products available.</p>
       ) : (

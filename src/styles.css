@@ -46,7 +46,7 @@ button {
 .site-shell {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 100px 24px 24px;
 }
 
 .site-header {
@@ -54,15 +54,31 @@ button {
   grid-template-columns: 1fr auto auto;
   gap: 20px;
   align-items: center;
-  margin-bottom: 36px;
+  margin-bottom: 0;
   padding: 14px 18px;
   border: 1px solid var(--line);
   border-radius: 24px;
   background: rgba(7, 11, 20, 0.65);
   backdrop-filter: blur(16px);
-  position: sticky;
-  top: 18px;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
   z-index: 10;
+}
+
+@media (min-width: 769px) {
+  .site-shell {
+    padding: 24px;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 18px;
+    left: auto;
+    right: auto;
+    margin-bottom: 36px;
+  }
 }
 
 .brand-mark {
@@ -1006,7 +1022,7 @@ button {
 
 @media (max-width: 640px) {
   .site-shell {
-    padding: 16px;
+    padding: 100px 16px 16px;
   }
 
   .hero-copy,
@@ -1031,4 +1047,132 @@ button {
   .feature-card-body {
     padding: 20px 22px 22px;
   }
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 0 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.footer-link {
+  color: var(--muted);
+  transition: color 160ms ease;
+}
+
+.footer-link:hover {
+  color: var(--text);
+}
+
+.footer-sep {
+  opacity: 0.4;
+}
+
+/* ── Privacy page ─────────────────────────────────────────────────────────── */
+
+.privacy-updated {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.privacy-body {
+  display: grid;
+  gap: 8px;
+  max-width: 720px;
+}
+
+.privacy-section {
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  display: grid;
+  gap: 12px;
+}
+
+.privacy-section h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.privacy-section p,
+.privacy-section ul {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.privacy-section ul {
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+}
+
+.privacy-section a {
+  color: var(--accent);
+}
+
+.privacy-section a:hover {
+  color: var(--accent-strong);
+}
+
+/* ── Skeleton loading ─────────────────────────────────────────────────────── */
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--panel) 25%,
+    var(--panel-strong) 50%,
+    var(--panel) 75%
+  );
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+.skeleton-text {
+  height: 1em;
+  width: 60%;
+}
+
+.skeleton-text--short {
+  width: 35%;
+}
+
+.skeleton-text--long {
+  width: 80%;
+}
+
+.skeleton-btn {
+  height: 40px;
+  width: 110px;
+  border-radius: 999px;
+}
+
+.skeleton-price {
+  height: 1.1em;
+  width: 70px;
+}
+
+.store-skeleton {
+  display: grid;
+  gap: 16px;
+}
+
+.store-skeleton-info {
+  display: grid;
+  gap: 0;
 }

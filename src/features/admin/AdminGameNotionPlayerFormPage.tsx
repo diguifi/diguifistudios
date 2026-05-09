@@ -62,6 +62,7 @@ export function AdminGameNotionPlayerFormPage() {
     try {
       if (isEdit) {
         await apiClient.put(`/api/game-notion-players/${encodeURIComponent(decodedPlayerId!)}`, {
+          newPlayerId: form.playerId !== decodedPlayerId ? form.playerId : undefined,
           lastPing: toIso(form.lastPing)
         });
       } else {
@@ -97,9 +98,8 @@ export function AdminGameNotionPlayerFormPage() {
               id="playerId"
               name="playerId"
               type="text"
-              value={isEdit ? decodedPlayerId! : form.playerId}
+              value={form.playerId}
               onChange={handleChange}
-              disabled={isEdit}
               required
               maxLength={100}
             />

@@ -86,10 +86,22 @@ export function PrivacyPage() {
         </section>
 
         <section className="privacy-section">
+          <h2>Disclaimer</h2>
+          <p>
+            All software available for download or purchase on this platform is provided strictly
+            for <strong>educational or entertainment purposes</strong>. Diguifi Studios assumes no
+            responsibility for any consequences arising from the misuse, modification, or
+            redistribution of any software, tool, or digital product offered here. By acquiring
+            any product, you agree to use it solely within the bounds of its intended purpose and
+            applicable laws.
+          </p>
+        </section>
+
+        <section className="privacy-section">
           <h2>Contact</h2>
           <p>
-            If you have questions or requests regarding your privacy, please reach out at{' '}
-            <a href="mailto:diego.penha95@gmail.com">diego.penha95@gmail.com</a>.
+            If you have questions or requests regarding your privacy, reach out on Discord:{' '}
+            <strong>@diguifi</strong>.
           </p>
         </section>
       </div>

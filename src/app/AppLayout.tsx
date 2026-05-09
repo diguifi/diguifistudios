@@ -171,7 +171,7 @@ export function AppLayout() {
       <footer className="site-footer">
         <Link to="/privacy" className="footer-link">Privacy Policy</Link>
         <span className="footer-sep">·</span>
-        <a href="mailto:diego.penha95@gmail.com" className="footer-link">diego.penha95@gmail.com</a>
+        <span className="footer-link">Discord: @diguifi</span>
       </footer>
     </div>
   );

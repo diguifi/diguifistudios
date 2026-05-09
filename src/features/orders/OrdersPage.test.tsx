@@ -35,7 +35,7 @@ describe('OrdersPage', () => {
   it('shows loading state initially', () => {
     vi.spyOn(apiModule.apiClient, 'get').mockReturnValue(new Promise(() => {}));
     render(<OrdersPage />);
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(document.querySelectorAll('.skeleton').length).toBeGreaterThan(0);
   });
 
   it('shows empty state when no orders', async () => {

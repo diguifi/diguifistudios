@@ -1,5 +1,7 @@
-import type { FormEvent } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type { FormEvent, MouseEvent } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
+
+const KebabContext = createContext<() => void>(() => {});
 import { apiClient, ApiError } from '../../shared/api/client';
 import { redirectToUrl } from '../../shared/navigation';
 import type { Order } from './types';
@@ -45,10 +47,11 @@ export function OrderActions({ order }: Props) {
 function KebabMenu({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     if (!open) return;
-    function onMouseDown(e: MouseEvent) {
+    function onMouseDown(e: globalThis.MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
     document.addEventListener('mousedown', onMouseDown);
@@ -56,22 +59,24 @@ function KebabMenu({ children }: { children: React.ReactNode }) {
   }, [open]);
 
   return (
-    <div className="order-kebab" ref={ref}>
-      <button
-        className="order-kebab-trigger"
-        aria-label="Order actions"
-        aria-haspopup="true"
-        aria-expanded={open}
-        onClick={() => setOpen(v => !v)}
-      >
-        ⋮
-      </button>
-      {open && (
-        <div className="order-kebab-dropdown" role="menu">
-          {children}
-        </div>
-      )}
-    </div>
+    <KebabContext.Provider value={closeMenu}>
+      <div className="order-kebab" ref={ref}>
+        <button
+          className="order-kebab-trigger"
+          aria-label="Order actions"
+          aria-haspopup="true"
+          aria-expanded={open}
+          onClick={() => setOpen(v => !v)}
+        >
+          ⋮
+        </button>
+        {open && (
+          <div className="order-kebab-dropdown" role="menu" onClick={closeMenu}>
+            {children}
+          </div>
+        )}
+      </div>
+    </KebabContext.Provider>
   );
 }
 
@@ -79,7 +84,8 @@ function CancelSubscriptionItem({ orderId }: { orderId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleClick() {
+  async function handleClick(e: MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation();
     setLoading(true);
     setError(null);
     try {
@@ -109,13 +115,16 @@ function CancelSubscriptionItem({ orderId }: { orderId: string }) {
 function DownloadBundleItem({ orderId }: { orderId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const closeMenu = useContext(KebabContext);
 
-  async function handleClick() {
+  async function handleClick(e: MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation();
     setLoading(true);
     setError(null);
     try {
       const data = await apiClient.get<{ downloadUrl: string; fileName: string }>(`/api/orders/${orderId}/bundle-download`);
       window.open(data.downloadUrl, '_blank', 'noopener');
+      closeMenu();
     } catch {
       setError('Failed to download bundle. Please try again.');
     } finally {

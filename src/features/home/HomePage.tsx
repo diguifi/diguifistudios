@@ -37,23 +37,28 @@ function GamePanel({
   return (
     <aside className="game-panel" aria-label={`${game.title} details`}>
       <button type="button" className="panel-close" onClick={onClose} aria-label="Close details">
-        X
+        ×
       </button>
-      <p className="eyebrow">{game.platformLabel}</p>
-      <h2>{game.title}</h2>
-      <p className="game-tagline">{game.tagline}</p>
-      <p className="game-description">{game.description}</p>
-      <div className="tag-row">
-        {game.tags.map((tag) => (
-          <span key={tag} className="tag-chip">
-            {tag}
-          </span>
-        ))}
+      <div className="game-panel-cover">
+        <GameCover game={game} />
       </div>
-      <div className="panel-actions">
-        <a className="primary-button" href={game.itchUrl} target="_blank" rel="noreferrer">
-          Open on itch.io
-        </a>
+      <div className="game-panel-body">
+        <p className="eyebrow">{game.platformLabel}</p>
+        <h2>{game.title}</h2>
+        <p className="game-tagline">{game.tagline}</p>
+        <p className="game-description">{game.description}</p>
+        <div className="tag-row">
+          {game.tags.map((tag) => (
+            <span key={tag} className="tag-chip">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="panel-actions">
+          <a className="primary-button" href={game.itchUrl} target="_blank" rel="noreferrer">
+            Open on itch.io
+          </a>
+        </div>
       </div>
     </aside>
   );
@@ -82,7 +87,8 @@ export function HomePage() {
           <p className="eyebrow">Games Portfolio</p>
           <h1>Telling stories through interactive experiences.</h1>
           <p className="hero-description">
-            Welcome to <b>Diguifi Studios</b>. Take a look at my browser experiments, game jam releases, tools and ongoing ideas!
+            Welcome to <strong>Diguifi Studios</strong>. Browser experiments, game jam releases,
+            tools and ongoing ideas — all made with care.
           </p>
           <div className="hero-actions">
             <button type="button" className="primary-button" onClick={scrollToCatalog}>
@@ -118,26 +124,34 @@ export function HomePage() {
       <section className="stats-strip" aria-label="Studio summary">
         <div>
           <strong>{games.filter((game) => game.status === 'released').length}</strong>
-          <span>released games</span>
+          <span>Released games</span>
         </div>
         <div>
           <strong>{games.filter((game) => game.status === 'jam').length}</strong>
-          <span>jam entries</span>
+          <span>Jam entries</span>
         </div>
         <div>
           <strong>{games.filter((game) => game.status === 'tool').length}</strong>
-          <span>tools created</span>
+          <span>Tools created</span>
         </div>
       </section>
 
       <section className="catalog-section">
         <div className="section-heading">
           <p className="eyebrow">Projects catalog</p>
+          <h2>All releases</h2>
         </div>
 
         <div className="catalog-grid" id="game-grid">
           {games.map((game) => (
-            <article key={game.id} className="game-card">
+            <article
+              key={game.id}
+              className="game-card"
+              onClick={() => setSelectedGame(game)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && setSelectedGame(game)}
+            >
               <GameCover game={game} />
               <div className="game-card-body">
                 <div className="game-card-header">
@@ -153,13 +167,7 @@ export function HomePage() {
                     </span>
                   ))}
                 </div>
-                <button
-                  type="button"
-                  className="text-button"
-                  onClick={() => setSelectedGame(game)}
-                >
-                  Read more
-                </button>
+                <span className="text-button">Details</span>
               </div>
             </article>
           ))}

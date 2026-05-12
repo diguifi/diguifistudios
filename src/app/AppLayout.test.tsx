@@ -36,7 +36,7 @@ describe('AppLayout', () => {
   it('shows login link when anonymous', () => {
     mockUseAuth.mockReturnValue(baseAuth());
     renderLayout();
-    expect(screen.getByText('Login with Google')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Sign in' })).toBeInTheDocument();
   });
 
   it('shows restoring message when refreshing', () => {
@@ -146,7 +146,14 @@ describe('AppLayout', () => {
   it('includes next param in login link', () => {
     mockUseAuth.mockReturnValue(baseAuth());
     renderLayout('/store');
-    const loginLink = screen.getByText('Login with Google').closest('a');
-    expect(loginLink?.getAttribute('href')).toContain('next=');
+    const loginLink = screen.getByRole('link', { name: 'Sign in' });
+    expect(loginLink.getAttribute('href')).toContain('next=');
+  });
+
+  it('does not concatenate next param when already on login page', () => {
+    mockUseAuth.mockReturnValue(baseAuth());
+    renderLayout('/login?next=%2Fstore');
+    const loginLink = screen.getByRole('link', { name: 'Sign in' });
+    expect(loginLink.getAttribute('href')).toBe('/login?next=%2Fstore');
   });
 });

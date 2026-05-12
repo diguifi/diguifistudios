@@ -106,7 +106,7 @@ function BellButton({ hasNotification }: { hasNotification: boolean }) {
       aria-label="Notifications"
       onClick={() => navigate('/notifications')}
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
         <path d="M13.73 21a2 2 0 0 1-3.46 0" />
       </svg>
@@ -122,45 +122,49 @@ export function AppLayout() {
   useEffect(() => {
     void checkNotifications();
   }, [location.pathname, checkNotifications]);
-  const loginPath = `/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
+  const loginPath = location.pathname === '/login'
+    ? `/login${location.search}`
+    : `/login?next=${encodeURIComponent(`${location.pathname}${location.search}`)}`;
 
   return (
     <div className="site-shell">
       <header className="site-header">
-        <NavLink to="/" className="brand-mark">
-          <span>Diguifi</span>
-          <span>Studios</span>
-        </NavLink>
+        <div className="site-header-inner">
+          <NavLink to="/" className="brand-mark">
+            <span>Diguifi</span>
+            <span>Studios</span>
+          </NavLink>
 
-        <nav className="main-nav" aria-label="Primary">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="main-nav" aria-label="Primary">
+            {links.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <div className="session-actions">
-          {authState === 'authenticated' && user ? (
-            <>
-              <BellButton hasNotification={user.hasNotification} />
-              <UserMenu
-                name={user.firstName ?? user.name}
-                isAdmin={user.isAdmin}
-                logout={logout}
-              />
-            </>
-          ) : authState === 'refreshing' || authState === 'authenticating' ? (
-            <span className="user-chip">Restoring session...</span>
-          ) : (
-            <Link className="primary-button" to={loginPath}>
-              Login with Google
-            </Link>
-          )}
+          <div className="session-actions">
+            {authState === 'authenticated' && user ? (
+              <>
+                <BellButton hasNotification={user.hasNotification} />
+                <UserMenu
+                  name={user.firstName ?? user.name}
+                  isAdmin={user.isAdmin}
+                  logout={logout}
+                />
+              </>
+            ) : authState === 'refreshing' || authState === 'authenticating' ? (
+              <span className="user-chip">Restoring session...</span>
+            ) : (
+              <Link className="primary-button" to={loginPath}>
+                Sign in
+              </Link>
+            )}
+          </div>
         </div>
       </header>
 
@@ -171,7 +175,7 @@ export function AppLayout() {
       <footer className="site-footer">
         <Link to="/privacy" className="footer-link">Privacy Policy</Link>
         <span className="footer-sep">·</span>
-        <span className="footer-link">Discord: @diguifi</span>
+        <span>Discord: @diguifi</span>
       </footer>
     </div>
   );

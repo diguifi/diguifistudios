@@ -271,6 +271,29 @@ describe('OrderActions', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
+  // ── KebabMenu closes on item click ───────────────────────────────────────
+
+  it('closes dropdown when Download Bundle item is clicked', async () => {
+    const user = userEvent.setup();
+    vi.spyOn(apiModule.apiClient, 'get').mockResolvedValue({ downloadUrl: 'https://example.com', fileName: 'f.zip' });
+    vi.stubGlobal('open', vi.fn());
+
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /download bundle/i }));
+
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
+  it('closes dropdown when Set Id item is clicked', async () => {
+    const user = userEvent.setup();
+    render(<OrderActions order={buildOrder({ productCategory: 'bundle', bundleType: 'gamenotion', status: 'paid' })} />);
+    await user.click(screen.getByRole('button', { name: /order actions/i }));
+    await user.click(screen.getByRole('button', { name: /set id/i }));
+
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  });
+
   // ── Helper ────────────────────────────────────────────────────────────────
 
   function buildOrder(overrides: Partial<Order> = {}): Order {

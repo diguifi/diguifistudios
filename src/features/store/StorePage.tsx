@@ -83,28 +83,30 @@ export function StorePage() {
           ))}
         </div>
       ) : products.length === 0 ? (
-        <p>No products available.</p>
+        <p style={{ color: 'var(--muted)' }}>No products available.</p>
       ) : (
-        products.map(product => (
-          <article key={product.id} className="product-card">
-            <div>
-              <p className="eyebrow">{product.category}</p>
-              <h2>{product.name}</h2>
-              <p>{product.description}</p>
-            </div>
-            <div className="product-meta">
-              <strong>{formatPrice(product.price, product.currency)}</strong>
-              <button
-                type="button"
-                className={`primary-button${product.isPurchased ? ' primary-button--purchased' : ''}`}
-                onClick={() => void handleCheckout(product.id)}
-                disabled={product.isPurchased || checkingOut === product.id}
-              >
-                {product.isPurchased ? 'Purchased' : checkingOut === product.id ? 'Starting checkout...' : 'Buy now'}
-              </button>
-            </div>
-          </article>
-        ))
+        <div className="products-grid">
+          {products.map(product => (
+            <article key={product.id} className="product-card">
+              <div>
+                <p className="eyebrow">{product.category}</p>
+                <h2>{product.name}</h2>
+                <p>{product.description}</p>
+              </div>
+              <div className="product-meta">
+                <strong>{formatPrice(product.price, product.currency)}</strong>
+                <button
+                  type="button"
+                  className={`primary-button${product.isPurchased ? ' primary-button--purchased' : ''}`}
+                  onClick={() => void handleCheckout(product.id)}
+                  disabled={product.isPurchased || checkingOut === product.id}
+                >
+                  {product.isPurchased ? 'Purchased' : checkingOut === product.id ? 'Starting...' : 'Buy now'}
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
       )}
 
       {status ? <p className="status-banner">{status}</p> : null}

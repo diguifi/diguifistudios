@@ -20,7 +20,7 @@ describe('HomePage', () => {
 
     expect(screen.getByText(/Tiny Land/i)).toBeInTheDocument();
 
-    await user.click(screen.getAllByRole('button', { name: /read more/i }).at(0)!);
+    await user.click(screen.getAllByRole('button').filter(el => el.tagName === 'ARTICLE').at(0)!);
 
     const detailsPanel = screen.getByLabelText(/we're just old kids details/i);
 
@@ -54,7 +54,7 @@ describe('HomePage', () => {
       </MemoryRouter>
     );
 
-    await user.click(screen.getAllByRole('button', { name: /read more/i }).at(0)!);
+    await user.click(screen.getAllByRole('button').filter(el => el.tagName === 'ARTICLE').at(0)!);
     expect(screen.getByRole('complementary')).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: /close details/i }));
@@ -84,7 +84,7 @@ describe('HomePage', () => {
       </MemoryRouter>
     );
 
-    await user.click(screen.getAllByRole('button', { name: /read more/i }).at(0)!);
+    await user.click(screen.getAllByRole('button').filter(el => el.tagName === 'ARTICLE').at(0)!);
     expect(screen.getByRole('complementary')).toBeInTheDocument();
 
     const backdrop = document.querySelector('.panel-backdrop') as HTMLElement;

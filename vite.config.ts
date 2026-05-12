@@ -7,7 +7,23 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: basePath,
-    plugins: [react()],
+    plugins: [
+      react(),
+      {
+        name: 'hash-redirect',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            const url = req.url ?? '/';
+            if (!url.includes('#') && !url.startsWith('/@') && !url.includes('.')) {
+              res.writeHead(302, { Location: '/#' + url });
+              res.end();
+              return;
+            }
+            next();
+          });
+        },
+      },
+    ],
     server: {
       port: 5174,
       open: true,

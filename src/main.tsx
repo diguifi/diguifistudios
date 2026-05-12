@@ -6,6 +6,10 @@ import { router } from './app/router';
 import { AuthProvider } from './features/auth/auth-context';
 import './styles.css';
 
+if (!window.location.hash && window.location.pathname !== '/') {
+  window.location.replace('/#' + window.location.pathname + window.location.search);
+}
+
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 function AppRoot() {

@@ -190,7 +190,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="catalog-section studio-overview-section" aria-labelledby="seo-intro-title">
+      <section hidden className="catalog-section studio-overview-section" aria-labelledby="seo-intro-title">
         <div className="section-heading">
           <p className="eyebrow">Studio overview</p>
           <h2 id="seo-intro-title">Indie development, games and web software</h2>

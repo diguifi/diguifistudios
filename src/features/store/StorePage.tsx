@@ -4,6 +4,7 @@ import { useAuth } from '../auth/auth-context';
 import { apiClient } from '../../shared/api/client';
 import { buildAbsoluteAppUrl } from '../../shared/config';
 import { redirectToUrl } from '../../shared/navigation';
+import { useSeo } from '../../shared/seo';
 import type { CheckoutSessionRequest, CheckoutSessionResponse, Product } from './types';
 
 function formatPrice(price: number, currency: string) {
@@ -17,6 +18,14 @@ export function StorePage() {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [status, setStatus] = useState<string | null>(null);
   const [checkingOut, setCheckingOut] = useState<string | null>(null);
+
+  useSeo({
+    title: 'Storefront and Software Releases',
+    description:
+      'Browse software releases, experiments and paid products from Diguifi Studios.',
+    path: '/store',
+    keywords: ['diguifi store', 'games store', 'software releases', 'indie development store', 'wallhack', 'webhadar', 'cs2 hack', 'cs2 wallhack', 'cs2 webhadar']
+  });
 
   useEffect(() => {
     apiClient.get<Product[]>('/api/produto')

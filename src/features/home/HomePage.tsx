@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { apiClient } from '../../shared/api/client';
+import { useSeo } from '../../shared/seo';
 import { loadGamesCatalog } from './catalog';
 import type { GameEntry } from './types';
 
@@ -68,6 +69,59 @@ export function HomePage() {
   const games = useMemo(() => loadGamesCatalog(), []);
   const featuredGame = games.find((game) => game.highlight) ?? games[0];
   const [selectedGame, setSelectedGame] = useState<GameEntry | null>(null);
+  const releasedGames = games.filter((game) => game.status === 'released').length;
+  const jamGames = games.filter((game) => game.status === 'jam').length;
+  const toolCount = games.filter((game) => game.status === 'tool').length;
+
+  useSeo({
+    title: 'Indie Development Games and CS2 Web Radar Projects',
+    description:
+      'Diguifi Studios is an indie development studio building games, browser experiments, software tools and CS2 web radar style projects.',
+    path: '/',
+    keywords: [
+      'diguifi',
+      'diguifi studios',
+      'indie development',
+      'indie game development',
+      'games',
+      'game developer',
+      'cs2',
+      'webradar',
+      'web radar',
+      'radarhack',
+      'wallhack'
+    ],
+    schema: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Diguifi Studios',
+        url: 'https://diguifi.com/',
+        sameAs: ['https://diguifi.itch.io/']
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Diguifi Studios Portfolio',
+        url: 'https://diguifi.com/',
+        description:
+          'Indie development portfolio with games, browser tools, software experiments and CS2 web radar related projects from Diguifi Studios.',
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: games.slice(0, 8).map((game, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            item: {
+              '@type': 'VideoGame',
+              name: game.title,
+              url: game.itchUrl,
+              genre: game.tags.join(', ')
+            }
+          }))
+        }
+      }
+    ]
+  });
 
   useEffect(() => {
     void apiClient.get('/ping').catch(() => {});
@@ -123,16 +177,35 @@ export function HomePage() {
 
       <section className="stats-strip" aria-label="Studio summary">
         <div>
-          <strong>{games.filter((game) => game.status === 'released').length}</strong>
+          <strong>{releasedGames}</strong>
           <span>Released games</span>
         </div>
         <div>
-          <strong>{games.filter((game) => game.status === 'jam').length}</strong>
+          <strong>{jamGames}</strong>
           <span>Jam entries</span>
         </div>
         <div>
-          <strong>{games.filter((game) => game.status === 'tool').length}</strong>
+          <strong>{toolCount}</strong>
           <span>Tools created</span>
+        </div>
+      </section>
+
+      <section className="catalog-section studio-overview-section" aria-labelledby="seo-intro-title">
+        <div className="section-heading">
+          <p className="eyebrow">Studio overview</p>
+          <h2 id="seo-intro-title">Indie development, games and web software</h2>
+        </div>
+        <div className="studio-overview-card">
+          <p>
+            <strong>Diguifi Studios</strong> builds indie games, browser-based tools and
+            technical experiments. This site is the central place for released games, game jam
+            projects, interactive software and ongoing development work.
+          </p>
+          <p>
+            If someone is looking for Diguifi projects around games, web software or CS2 web radar
+            style experiments, this portfolio is the canonical reference point for current
+            releases.
+          </p>
         </div>
       </section>
 

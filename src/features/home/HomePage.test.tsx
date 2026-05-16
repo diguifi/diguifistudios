@@ -45,6 +45,22 @@ describe('HomePage', () => {
     expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled();
   });
 
+  test('applies SEO metadata for the home page', () => {
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    expect(document.title).toContain('Diguifi Studios');
+    expect(document.head.querySelector('meta[name="keywords"]')?.getAttribute('content')).toContain(
+      'webradar'
+    );
+    expect(document.head.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
+      'http://localhost:3000/'
+    );
+  });
+
   test('closes panel when clicking the close button', async () => {
     const user = userEvent.setup();
 

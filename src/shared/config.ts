@@ -1,7 +1,10 @@
 const baseUrl = import.meta.env.BASE_URL;
 
 export function buildInternalHashPath(path: string) {
-  return `${baseUrl}#${path.startsWith('/') ? path : `/${path}`}`;
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const trimmedBaseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
+  return `${trimmedBaseUrl}${normalizedPath}`;
 }
 
 export function buildAbsoluteAppUrl(path: string) {

@@ -1,4 +1,4 @@
-import { createHashRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { AppLayout } from './AppLayout';
 import { NotFoundPage } from './NotFoundPage';
 import { AuthCallbackPage } from '../features/auth/AuthCallbackPage';
@@ -17,7 +17,7 @@ import { AdminNotificationFormPage } from '../features/admin/AdminNotificationFo
 import { NotificationsPage } from '../features/notifications/NotificationsPage';
 import { PrivacyPage } from '../features/legal/PrivacyPage';
 
-export const router = createHashRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,

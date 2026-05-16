@@ -1,4 +1,13 @@
+import { useSeo } from '../../shared/seo';
+
 export function PrivacyPage() {
+  useSeo({
+    title: 'Privacy Policy',
+    description: 'Privacy policy for Diguifi Studios accounts, purchases and website usage.',
+    path: '/privacy',
+    keywords: ['diguifi privacy policy', 'diguifi studios privacy']
+  });
+
   return (
     <div className="page-stack privacy-page">
       <section className="section-heading">

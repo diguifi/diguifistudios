@@ -3,14 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index,follow" />
     <meta
       name="description"
-      content="Diguifi Studios, an indie game development studio."
+      content="Diguifi Studios is an indie development studio building games, browser tools and CS2 web radar style software projects."
     />
+    <meta
+      name="keywords"
+      content="diguifi, diguifi studios, indie development, indie game development, games, cs2, webradar, web radar, radarhack, wallhack"
+    />
+    <meta property="og:site_name" content="Diguifi Studios" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Diguifi Studios" />
+    <meta property="og:description" content="Diguifi Studios is an indie development studio building games, browser tools and CS2 web radar style software projects." />
+    <meta property="og:url" content="https://diguifi.com/" />
+    <meta property="og:image" content="https://diguifi.com/og-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Diguifi Studios" />
+    <meta name="twitter:description" content="Diguifi Studios is an indie development studio building games, browser tools and CS2 web radar style software projects." />
+    <meta name="twitter:image" content="https://diguifi.com/og-cover.png" />
+    <link rel="canonical" href="https://diguifi.com/" />
     <title>Diguifi Studios</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script>
+      (function() {
+        const params = new URLSearchParams(window.location.search);
+        const redirectedPath = params.get('p');
+
+        if (!redirectedPath) {
+          return;
+        }
+
+        const decodedPath = decodeURIComponent(redirectedPath);
+        window.history.replaceState({}, '', decodedPath);
+      })();
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTFQDT5HD5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BTFQDT5HD5');
+    </script>
   </head>
   <body>
     <div id="root"></div>

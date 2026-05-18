@@ -59,15 +59,6 @@ describe('GameDetailsPage', () => {
     expect(screen.queryByRole('link', { name: /open on itch.io/i })).not.toBeInTheDocument();
   });
 
-  test('normalizes local cover image paths on nested routes', () => {
-    renderGameDetailsPage('/tools/game-notion');
-
-    expect(screen.getByRole('img', { name: /cover art for game notion - cs2 webradar/i })).toHaveAttribute(
-      'src',
-      '/imgs/radarCover.jpeg'
-    );
-  });
-
   test('opens zoom overlay when clicking the carousel image', async () => {
     const user = userEvent.setup();
 

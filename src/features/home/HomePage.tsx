@@ -3,30 +3,8 @@ import { Link } from 'react-router-dom';
 import { apiClient } from '../../shared/api/client';
 import { useSeo } from '../../shared/seo';
 import { loadGamesCatalog } from './catalog';
+import { GameCover } from './GameCover';
 import type { GameEntry } from './types';
-
-function GameCover({ game }: { game: GameEntry }) {
-  const [hasImageError, setHasImageError] = useState(false);
-  const imageUrl = game.cover ?? game.img;
-
-  if (!imageUrl || hasImageError) {
-    return (
-      <div className="cover-fallback" aria-hidden="true">
-        <span>{game.title.slice(0, 1)}</span>
-      </div>
-    );
-  }
-
-  return (
-    <img
-      className="game-cover"
-      src={imageUrl}
-      alt={`Cover art for ${game.title}`}
-      loading="lazy"
-      onError={() => setHasImageError(true)}
-    />
-  );
-}
 
 function GamePanel({
   game,
@@ -56,9 +34,19 @@ function GamePanel({
           ))}
         </div>
         <div className="panel-actions">
-          <a className="primary-button" href={game.itchUrl} target="_blank" rel="noreferrer">
-            Open on itch.io
-          </a>
+          <Link className="ghost-button" to={game.pageDetails.path} onClick={onClose}>
+            More details
+          </Link>
+          {game.inStore ? (
+            <Link className="primary-button" to="/store" onClick={onClose}>
+              Buy
+            </Link>
+          ) : null}
+          {game.itchUrl ? (
+            <a className="primary-button" href={game.itchUrl} target="_blank" rel="noreferrer">
+              Open on itch.io
+            </a>
+          ) : null}
         </div>
       </div>
     </aside>

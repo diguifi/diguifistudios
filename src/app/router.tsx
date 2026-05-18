@@ -16,6 +16,7 @@ import { AdminNotificationsPage } from '../features/admin/AdminNotificationsPage
 import { AdminNotificationFormPage } from '../features/admin/AdminNotificationFormPage';
 import { NotificationsPage } from '../features/notifications/NotificationsPage';
 import { PrivacyPage } from '../features/legal/PrivacyPage';
+import { GameDetailsPage } from '../features/home/GameDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,14 @@ export const router = createBrowserRouter([
       {
         path: 'privacy',
         element: <PrivacyPage />
+      },
+      {
+        path: 'games/:slug',
+        element: <GameDetailsPage />
+      },
+      {
+        path: 'tools/:slug',
+        element: <GameDetailsPage />
       },
       {
         path: '*',

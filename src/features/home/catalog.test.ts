@@ -12,7 +12,13 @@ vi.mock('../../data/games.json', () => ({
       status: 'released',
       platformLabel: 'Browser',
       itchUrl: 'https://itch.io/game-1',
-      img: 'img.png'
+      img: 'img.png',
+      pageDetails: {
+        promoImgs: [],
+        detailedDescription: 'Long description',
+        trailer: '',
+        path: '/games/game-1'
+      }
     },
     {
       id: 'game-2',
@@ -26,12 +32,19 @@ vi.mock('../../data/games.json', () => ({
       itchUrl: 'https://itch.io/game-2',
       cover: 'cover.png',
       screenshots: ['shot1.png'],
-      highlight: true
+      highlight: true,
+      pageDetails: {
+        promoImgs: ['promo.png'],
+        detailedDescription: 'Another long description',
+        trailer: 'https://youtube.com/watch?v=abc',
+        path: '/games/game-2',
+        keywords: ['alpha', 'beta']
+      }
     }
   ]
 }));
 
-import { loadGamesCatalog } from './catalog';
+import { findGameByPagePath, loadGamesCatalog } from './catalog';
 
 describe('loadGamesCatalog', () => {
   it('returns an array with all entries', () => {
@@ -67,5 +80,16 @@ describe('loadGamesCatalog', () => {
   it('preserves highlight when true', () => {
     const catalog = loadGamesCatalog();
     expect(catalog[1]!.highlight).toBe(true);
+  });
+
+  it('normalizes page details and keeps provided path', () => {
+    const catalog = loadGamesCatalog();
+    expect(catalog[0]!.pageDetails.path).toBe('/games/game-1');
+    expect(catalog[0]!.pageDetails.keywords).toContain('Game One');
+  });
+
+  it('finds an entry by page path', () => {
+    const entry = findGameByPagePath('/games/game-2');
+    expect(entry?.title).toBe('Game Two');
   });
 });

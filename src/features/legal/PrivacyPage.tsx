@@ -78,6 +78,32 @@ export function PrivacyPage() {
         </section>
 
         <section className="privacy-section">
+          <h2>Google Analytics</h2>
+          <p>
+            We use Google Analytics to understand how visitors use this website, such as which
+            pages are viewed, how long visits last, and which features are used most often. This
+            information helps us improve the site and its performance. Google Analytics may
+            collect information such as your IP address, browser type, device information, and
+            general usage data in accordance with Google's own privacy practices.
+          </p>
+          <p>
+            If you prefer not to be tracked by Google Analytics, you can install Google's
+            official opt-out browser add-on:
+            {' '}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noreferrer"
+            >
+              https://tools.google.com/dlpage/gaoptout
+            </a>
+            . After installing the add-on in your browser, follow Google's instructions to
+            enable it. Once active, it prevents Google Analytics from collecting data from your
+            visits to supported websites.
+          </p>
+        </section>
+
+        <section className="privacy-section">
           <h2>Your Rights</h2>
           <p>
             You may request deletion of your account and all associated data at any time by

@@ -4,61 +4,109 @@
     "title": "We're just old kids",
     "tagline": "Always look outside.",
     "description": "A small atmospheric browser experience that sets the tone for Diguifi's catalog with a compact but expressive presentation.",
-    "releaseYear": 2025,
+    "releaseYear": 2024,
     "tags": ["browser", "narrative", "atmospheric"],
     "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE4NDgxOTczLnBuZw==/original/JgZymf.png",
     "itchUrl": "https://diguifi.itch.io/were-just-old-kids",
-    "highlight": true
+    "highlight": true,
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/oldkids1.png",
+        "imgs/oldkids2.png",
+        "imgs/oldkids3.png"
+      ],
+      "detailedDescription": "We're just old kids is a short atmospheric experience built around mood, reflection, and quiet observation. Instead of chasing complexity, it focuses on a small but expressive presentation that invites the player to slow down and absorb its feeling. It works as both a standalone piece and a clear introduction to the tone behind Diguifi's catalog.",
+      "trailer": "https://www.youtube.com/watch?v=eaa7pm8qA5c",
+      "path": "/games/were-just-old-kids",
+      "keywords": ["atmospheric", "narrative", "browser", "short", "reflective"]
+    }
   },
   {
     "id": "tiny-land",
     "title": "Tiny Land",
     "tagline": "<600kb online RPG!",
     "description": "A tiny-scale online RPG concept focused on compact scope, immediate access, and playful worldbuilding.",
-    "releaseYear": 2025,
+    "releaseYear": 2020,
     "tags": ["rpg", "browser", "multiplayer"],
     "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzY2NzU3NjMucG5n/original/XjFIOX.png",
-    "itchUrl": "https://diguifi.itch.io/tiny-land"
+    "itchUrl": "https://diguifi.itch.io/tiny-land",
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/tiny1.png",
+        "imgs/tiny2.png",
+        "imgs/tiny3.png",
+        "imgs/tiny4.png"
+      ],
+      "detailedDescription": "Tiny Land explores the idea of a very small online RPG that still feels social, playful, and alive. Its appeal comes from compact scope, instant access in the browser, and a world built to be lightweight without losing personality. It represents a practical experiment in how much RPG identity can fit into a minimal package.",
+      "trailer": "https://www.youtube.com/watch?v=TGXUVKWpv2w",
+      "path": "/games/tiny-land",
+      "keywords": ["rpg", "browser", "multiplayer", "compact", "playful"]
+    }
   },
   {
     "id": "nur",
     "title": "NuR",
     "tagline": "What are you running from?",
     "description": "A platformer with a tense pitch and a stronger sense of pursuit than its small footprint suggests.",
-    "releaseYear": 2025,
+    "releaseYear": 2021,
     "tags": ["platformer", "mystery", "browser", "android"],
     "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzc1ODQyNTQucG5n/original/XWDc%2Bq.png",
-    "itchUrl": "https://diguifi.itch.io/nur"
+    "itchUrl": "https://diguifi.itch.io/nur",
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/nur.png"
+      ],
+      "detailedDescription": "NuR is a platformer shaped by tension, movement, and the constant suggestion that something is behind you. Its core identity comes from pairing a compact format with a stronger emotional sense of pursuit and uncertainty. Even in a small footprint, it aims to create momentum, unease, and curiosity about what lies ahead.",
+      "trailer": "",
+      "path": "/games/nur"
+    }
   },
   {
     "id": "i-dont-know-where-i-am",
     "title": "I don't know where I am",
     "tagline": "Small thriller about you.",
     "description": "A concise thriller-puzzle premise that fits naturally into a portfolio focused on mood and experimentation.",
-    "releaseYear": 2025,
+    "releaseYear": 2022,
     "tags": ["puzzle", "walking-sim", "browser"],
     "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzEwMDg3NTgxLnBuZw==/original/13oM%2F3.png",
-    "itchUrl": "https://diguifi.itch.io/where-i-am"
+    "itchUrl": "https://diguifi.itch.io/where-i-am",
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/idkwhereiam.png"
+      ],
+      "detailedDescription": "I don't know where I am is a small thriller experience built around uncertainty, perspective, and discomfort. It mixes puzzle and walking-sim elements to create a more personal and intimate kind of tension rather than relying on scale. The result is a compact experiment focused on mood, identity, and the uneasy feeling of being lost inside your own situation.",
+      "trailer": "",
+      "path": "/games/i-dont-know-where-i-am"
+    }
   },
   {
     "id": "dudes-quest",
     "title": "Dude's Quest",
     "tagline": "A fun side-scrolling adventure game.",
     "description": "A side-scrolling adventure entry positioned as one of the more classically readable releases in the catalog.",
-    "releaseYear": 2025,
+    "releaseYear": 2019,
     "tags": ["adventure", "side-scroller", "browser"],
     "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE4OTQ5NDQucG5n/original/pw36S%2F.png",
-    "itchUrl": "https://diguifi.itch.io/dudes-quest"
+    "itchUrl": "https://diguifi.itch.io/dudes-quest",
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/dudes1.png",
+        "imgs/dudes2.png"
+      ],
+      "detailedDescription": "Dude's Quest leans into a more classic side-scrolling adventure structure, making it one of the most immediately readable entries in the catalog. It is framed around accessible action, straightforward progression, and a lighter tone than some of the more experimental projects nearby. That makes it useful both as a game on its own and as a contrast point within the broader portfolio.",
+      "trailer": "",
+      "path": "/games/dudes-quest"
+    }
   },
   {
     "id": "tiny-rpg-studio",
@@ -70,43 +118,87 @@
     "status": "tool",
     "platformLabel": "Run in browser",
     "img": "https://img.itch.zone/aW1nLzI2ODM4NTgxLnBuZw==/315x250%23c/7SUItJ.png",
-    "itchUrl": "https://andredarcie.itch.io/tiny-rpg-studio"
+    "itchUrl": "https://andredarcie.itch.io/tiny-rpg-studio",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Tiny RPG Studio is a browser-based creation tool designed for making small, focused RPG projects without heavy setup. Its value comes from reducing friction, encouraging experimentation, and making it easier to create and share compact interactive worlds. Within the catalog, it stands out as a product for creators rather than players while still reflecting the same interest in small-scale design.",
+      "trailer": "",
+      "path": "/tools/tiny-rpg-studio",
+      "keywords": ["tool", "browser", "rpg", "creation", "accessible"]
+    }
   },
   {
     "id": "tic-tac-toe-evolved",
     "title": "Tic Tac Toe: Evolved",
     "tagline": "Play tic-tac-toe online like never before.",
     "description": "A familiar concept reframed as a more dynamic multiplayer puzzle, useful for showing catalog variety.",
-    "releaseYear": 2025,
+    "releaseYear": 2023,
     "tags": ["puzzle", "multiplayer", "browser"],
     "status": "released",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE0MTg1NTQ5LnBuZw==/original/Nw9p8s.png",
-    "itchUrl": "https://diguifi.itch.io/tic-tac-toe-evolved"
+    "itchUrl": "https://diguifi.itch.io/tic-tac-toe-evolved",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Tic Tac Toe: Evolved starts from a universally known idea and pushes it into a more dynamic, competitive, and surprising form. By reworking a familiar ruleset, it creates a project that is easy to approach but still distinct within the catalog. It helps showcase variety by proving that even simple concepts can be reframed into something more playful and memorable.",
+      "trailer": ""
+    }
   },
   {
     "id": "open-video-game-data",
     "title": "Open Video Game Data",
     "tagline": "A great alternative to discover awesome games.",
     "description": "A browser tool/product adjacent to the game catalog, showing how the studio can host software products beyond pure games.",
-    "releaseYear": 2025,
+    "releaseYear": 2024,
     "tags": ["tool", "browser", "discovery"],
     "status": "tool",
     "platformLabel": "Run in browser",
     "img": "https://img.itch.zone/aW1nLzEzMDUzMzg5LnBuZw==/original/2MSesY.png",
-    "itchUrl": "https://diguifi.itch.io/openvideogamedata"
+    "itchUrl": "https://diguifi.itch.io/openvideogamedata",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Open Video Game Data is a discovery-oriented browser product that expands the catalog beyond playable games. It is positioned as a practical tool for exploring and finding interesting titles, while also showing the studio's ability to build adjacent software experiences. That broader product angle adds range to the portfolio without breaking its overall identity.",
+      "trailer": "",
+      "path": "/tools/open-video-game-data",
+      "keywords": ["tool", "browser", "discovery", "adjacent", "practical"]
+    }
   },
   {
     "id": "tiden",
     "title": "Tiden",
     "tagline": "Visual novel jam release.",
     "description": "A game jam visual novel that broadens genre range inside the portfolio.",
-    "releaseYear": 2025,
+    "releaseYear": 2026,
     "tags": ["visual novel", "jam", "browser"],
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzI1NDIwMjc2LnBuZw==/original/z6%2F%2BzW.png",
-    "itchUrl": "https://diguifi.itch.io/tiden"
+    "itchUrl": "https://diguifi.itch.io/tiden",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Tiden is a visual novel jam project that widens the catalog's genre range through a more text-driven and narrative-focused format. Its presence in the lineup matters because it shows comfort with tone, pacing, and presentation outside of action-heavy structures. As a jam release, it also captures the experimental spirit of making something concise under creative constraints.",
+      "trailer": ""
+    }
+  },
+  {
+    "id": "life-outside",
+    "title": "Life Outside",
+    "tagline": "Visual novel jam release.",
+    "description": "A small tale about a personal experience.",
+    "releaseYear": 2026,
+    "tags": ["visual novel", "jam", "browser"],
+    "status": "jam",
+    "platformLabel": "Play in browser",
+    "img": "https://img.itch.zone/aW1nLzI2OTAxMDI3LnBuZw==/315x250%23c/V4mRwc.png",
+    "itchUrl": "https://diguifi.itch.io/the-life-outside",
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/outside1.png",
+        "imgs/outside2.png"
+      ],
+      "detailedDescription": "Life Outside is a visual novel jam project about my personal experience with corporate work, family support, struggle and meaning.",
+      "trailer": ""
+    }
   },
   {
     "id": "escaping-work",
@@ -118,7 +210,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzIyODM0NTM3LnBuZw==/original/zKJbgr.png",
-    "itchUrl": "https://diguifi.itch.io/escaping-work"
+    "itchUrl": "https://diguifi.itch.io/escaping-work",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Escaping Work is an unfinished GMTK jam prototype built around a playful premise and quick experimentation. Even without being a fully developed release, it has value as a visible sketch of ideas, tone, and process. It helps the archive feel honest by preserving not just polished outcomes but also the more spontaneous side of development.",
+      "trailer": ""
+    }
   },
   {
     "id": "escalamuta",
@@ -130,7 +227,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE3NDUyMjA5LnBuZw==/original/gh5BN0.png",
-    "itchUrl": "https://diguifi.itch.io/escalamuta"
+    "itchUrl": "https://diguifi.itch.io/escalamuta",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "escalaMUTA is a GMTK 2024 platformer entry that reinforces the catalog's strong connection to game jam development. It represents fast iteration, focused scope, and the ability to shape a complete interactive idea within tight limits. In the timeline of the studio, it works as another clear marker of consistency and experimentation.",
+      "trailer": ""
+    }
   },
   {
     "id": "moo",
@@ -142,7 +244,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE3NDUxODMxLnBuZw==/original/%2FqnzjW.png",
-    "itchUrl": "https://diguifi.itch.io/moo"
+    "itchUrl": "https://diguifi.itch.io/moo",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Moo is a jam game with a light survival flavor, adding another texture to the catalog's range of small projects. Its role is not to be a massive centerpiece, but to show how varied the studio's experiments can be across themes and mechanics. As part of the archive, it strengthens the sense of continuity across yearly jam releases.",
+      "trailer": ""
+    }
   },
   {
     "id": "the-walking-cube",
@@ -154,7 +261,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE3NDUxNzcyLnBuZw==/original/l%2BRQcX.png",
-    "itchUrl": "https://diguifi.itch.io/the-walking-cube"
+    "itchUrl": "https://diguifi.itch.io/the-walking-cube",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "The Walking Cube is a small GMTK 2022 puzzle project built around a concise concept and a jam-sized scope. Its charm comes from committing to a simple central idea and presenting it in a direct, readable way. In a curated archive, it works well as one of the earlier examples of focused experimentation.",
+      "trailer": ""
+    }
   },
   {
     "id": "tow-escape",
@@ -166,7 +278,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE3NDUyNDY1LnBuZw==/original/tQb2rc.png",
-    "itchUrl": "https://diguifi.itch.io/tow-escape"
+    "itchUrl": "https://diguifi.itch.io/tow-escape",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Tow Escape is a tiny side-scrolling jam game made under extremely tight time pressure, which is part of its identity. The project highlights speed, improvisation, and the ability to deliver a playable concept overnight. That rough immediacy gives it value in the archive beyond polish alone.",
+      "trailer": ""
+    }
   },
   {
     "id": "legemd-of-bilu",
@@ -178,7 +295,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzcwNDMzMTcucG5n/original/0LQ8ag.png",
-    "itchUrl": "https://diguifi.itch.io/legemd-of-bilu"
+    "itchUrl": "https://diguifi.itch.io/legemd-of-bilu",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Legemd of Bilu stands out through its eccentric presentation, unusual tone, and intentionally odd personality. Rather than fitting neatly into a polished mainstream shape, it feels like a preserved artifact from a more chaotic creative moment. That distinct voice is exactly what makes it worth keeping visible in the studio archive.",
+      "trailer": ""
+    }
   },
   {
     "id": "secrets-of-the-cursed-mountain",
@@ -190,19 +312,33 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzg0MTY1MzEucG5n/original/5MMG7x.png",
-    "itchUrl": "https://diguifi.itch.io/secrets-of-the-cursed-mountain"
+    "itchUrl": "https://diguifi.itch.io/secrets-of-the-cursed-mountain",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Secrets Of the Cursed Mountain is a work-in-progress metroidvania concept with more obvious long-form potential than many of the smaller jam releases around it. Its genre suggests exploration, progression, and a stronger world structure that could support future expansion. Even in this early state, it reads as a project that could become a larger spotlight page later on.",
+      "trailer": ""
+    }
   },
   {
     "id": "piracy-isnt-stealing",
     "title": "Piracy Isn't Stealing",
     "tagline": "Submission to Lame Jam 38.",
     "description": "A jam submission that rounds out the portfolio's archive of experiments and one-off concepts.",
-    "releaseYear": 2021,
+    "releaseYear": 2024,
     "tags": ["jam", "browser", "experimental"],
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE3NDkxOTY3LnBuZw==/original/IPvuNO.png",
-    "itchUrl": "https://diguifi.itch.io/isnt-stealing"
+    "itchUrl": "https://diguifi.itch.io/isnt-stealing",
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/pirate.png"
+      ],
+      "detailedDescription": "Piracy Isn't Stealing is a jam experiment that helps complete the catalog's record of one-off ideas and theme-driven projects. Its value comes from being conceptually specific and clearly tied to the creative constraint of a jam submission. As part of the archive, it contributes to the sense that the studio is willing to test unusual directions quickly.",
+      "trailer": "",
+      "path": "/games/piracy-isnt-stealing",
+      "keywords": ["jam", "browser", "experimental"]
+    }
   },
   {
     "id": "busted",
@@ -214,7 +350,12 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzIxNTkxNTEucG5n/original/LTFqvR.png",
-    "itchUrl": "https://diguifi.itch.io/busted"
+    "itchUrl": "https://diguifi.itch.io/busted",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Busted is a small escape-room puzzle game built around a focused scenario and a clear interactive goal. It benefits from the kind of compact design where every element exists to support the central puzzle loop. Inside the catalog, it works as an approachable example of clean, self-contained problem-solving design.",
+      "trailer": ""
+    }
   },
   {
     "id": "make-me-laugh",
@@ -226,6 +367,36 @@
     "status": "jam",
     "platformLabel": "Play in browser",
     "img": "https://img.itch.zone/aW1nLzE3NDU0NjY4LnBuZw==/original/PxJ%2Bn6.png",
-    "itchUrl": "https://diguifi.itch.io/make-me-laugh-ggj"
+    "itchUrl": "https://diguifi.itch.io/make-me-laugh-ggj",
+    "pageDetails": {
+      "promoImgs": [],
+      "detailedDescription": "Make me, Laugh is a very fast Global Game Jam entry created in only a few hours, and that production context is central to how the project should be read. It captures the studio's willingness to move quickly, explore a prompt, and commit to an idea under pressure. In the archive, it reinforces the pattern of speed, experimentation, and creative range.",
+      "trailer": "",
+      "path": "/games/make-me-laugh-ggj",
+      "keywords": ["jam", "ggj", "browser", "fast", "experimental"]
+    }
+  },
+  {
+    "id": "game-notion",
+    "title": "Game Notion - CS2 WebRadar",
+    "tagline": "A tool for CS2 gameplay for educational purposes.",
+    "description": "A web-based tool for visualizing and analyzing CS2 gameplay, designed for educational use.",
+    "releaseYear": 2026,
+    "tags": ["cs2", "webradar", "browser", "tool"],
+    "status": "tool",
+    "platformLabel": "Windows, Browser",
+    "img": "imgs/radarCover.jpeg",
+    "itchUrl": "",
+    "inStore": true,
+    "pageDetails": {
+      "promoImgs": [
+        "imgs/radar.jpeg",
+        "imgs/radar2.jpg"
+      ],
+      "detailedDescription": "Game Notion is a web-based tool designed to visualize and analyze gameplay from Counter-Strike 2. It shows all players from a given match, and real time data on the game, allowing for new strategies, and performance through an interactive web-based interface. By offering detailed breakdowns of matches, player movements, and tactical decisions, Game Notion serves as an educational resource for those looking to improve their understanding of CS2 or enhance their casual play. Please, read our Privacy policy for more info on educational software.",
+      "trailer": "",
+      "path": "/tools/game-notion",
+      "keywords": ["cs2", "webradar", "browser"]
+    }
   }
 ]

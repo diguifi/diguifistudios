@@ -25,6 +25,10 @@ describe('HomePage', () => {
     const detailsPanel = screen.getByLabelText(/we're just old kids details/i);
 
     expect(within(detailsPanel).getByRole('heading', { name: /we're just old kids/i })).toBeInTheDocument();
+    expect(within(detailsPanel).getByRole('link', { name: /more details/i })).toHaveAttribute(
+      'href',
+      '/games/were-just-old-kids'
+    );
     expect(within(detailsPanel).getByRole('link', { name: /open on itch.io/i })).toHaveAttribute(
       'href',
       'https://diguifi.itch.io/were-just-old-kids'
@@ -116,5 +120,24 @@ describe('HomePage', () => {
     );
     const fallbacks = document.querySelectorAll('.cover-fallback');
     expect(fallbacks.length).toBeGreaterThanOrEqual(0);
+  });
+
+  test('shows buy action for in-store items without itch url', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>
+    );
+
+    await user.click(screen.getByRole('button', { name: /game notion - cs2 webradar/i }));
+
+    const detailsPanel = screen.getByLabelText(/game notion - cs2 webradar details/i);
+    expect(within(detailsPanel).getByRole('link', { name: /buy/i })).toHaveAttribute(
+      'href',
+      '/store'
+    );
+    expect(within(detailsPanel).queryByRole('link', { name: /open on itch.io/i })).not.toBeInTheDocument();
   });
 });

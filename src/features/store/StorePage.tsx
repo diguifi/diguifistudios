@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/auth-context';
 import { apiClient } from '../../shared/api/client';
 import { buildAbsoluteAppUrl } from '../../shared/config';
@@ -99,7 +99,15 @@ export function StorePage() {
             <article key={product.id} className="product-card">
               <div>
                 <p className="eyebrow">{product.category}</p>
-                <h2>{product.name}</h2>
+                <h2>
+                  {product.slug.trim() ? (
+                    <Link style={{ textDecoration: 'underline' }} className="product-title-link" to={product.slug}>
+                      {product.name}
+                    </Link>
+                  ) : (
+                    product.name
+                  )}
+                </h2>
                 <p>{product.description}</p>
               </div>
               <div className="product-meta">

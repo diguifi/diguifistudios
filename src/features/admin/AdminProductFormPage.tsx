@@ -128,7 +128,6 @@ export function AdminProductFormPage() {
                 type="text"
                 value={form.slug}
                 onChange={handleChange}
-                required
               />
             </div>
           </div>

@@ -1138,6 +1138,14 @@ button {
   line-height: 1;
 }
 
+.product-title-link {
+  transition: color 140ms ease;
+}
+
+.product-title-link:hover {
+  color: var(--accent);
+}
+
 .product-card > div > p {
   margin: 0;
   color: var(--muted);

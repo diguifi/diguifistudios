@@ -25,7 +25,7 @@ const products: AdminProduct[] = [
   },
   {
     id: 'prod-2',
-    slug: 'service-pack',
+    slug: '',
     name: 'Service Pack',
     description: 'A service',
     price: 50,
@@ -96,6 +96,17 @@ describe('AdminProductsPage', () => {
     expect(await screen.findByText('Supporter Pack')).toBeInTheDocument();
     expect(screen.getByText('Service Pack')).toBeInTheDocument();
     expect(screen.getByText('supporter-pack')).toBeInTheDocument();
+  });
+
+  it('uses product id for edit path', async () => {
+    mockUseAuth.mockReturnValue(adminAuthState());
+    vi.spyOn(apiModule.apiClient, 'get').mockResolvedValue(products);
+    renderPage();
+
+    await screen.findByText('Supporter Pack');
+    const editLinks = screen.getAllByRole('link', { name: 'Edit' });
+    expect(editLinks[0]).toHaveAttribute('href', '/admin/products/prod-1/edit');
+    expect(editLinks[1]).toHaveAttribute('href', '/admin/products/prod-2/edit');
   });
 
   it('shows empty state when no products', async () => {

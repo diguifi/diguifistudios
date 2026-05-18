@@ -145,6 +145,26 @@ describe('AdminProductFormPage', () => {
     );
   });
 
+  it('allows saving with an empty slug', async () => {
+    const user = userEvent.setup();
+    mockUseAuth.mockReturnValue(adminAuthState());
+    const postSpy = vi.spyOn(apiModule.apiClient, 'post').mockResolvedValue({});
+    renderCreate();
+
+    await screen.findByRole('button', { name: 'Create' });
+    await user.type(screen.getByLabelText('Name'), 'Slugless Product');
+    await user.type(screen.getByLabelText('Description'), 'No slug');
+    await user.click(screen.getByRole('button', { name: 'Create' }));
+
+    await waitFor(() => {
+      expect(postSpy).toHaveBeenCalledWith(
+        '/api/produto',
+        expect.objectContaining({ slug: '' })
+      );
+    });
+  });
+
+
   it('shows ApiError message on submit failure', async () => {
     const user = userEvent.setup();
     mockUseAuth.mockReturnValue(adminAuthState());

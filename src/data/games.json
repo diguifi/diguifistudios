@@ -394,7 +394,7 @@
         "imgs/radar2.jpg"
       ],
       "detailedDescription": "Game Notion is a web-based tool designed to visualize and analyze gameplay from Counter-Strike 2. It shows all players from a given match, and real time data on the game, allowing for new strategies, and performance through an interactive web-based interface. By offering detailed breakdowns of matches, player movements, and tactical decisions, Game Notion serves as an educational resource for those looking to improve their understanding of CS2 or enhance their casual play. Please, read our Privacy policy for more info on educational software.",
-      "trailer": "",
+      "trailer": "https://www.youtube.com/watch?v=nD-Qt5oTANM",
       "path": "/tools/game-notion",
       "keywords": ["cs2", "webradar", "browser"]
     }
